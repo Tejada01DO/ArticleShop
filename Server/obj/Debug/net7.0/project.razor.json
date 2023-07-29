@@ -5081,38 +5081,38 @@
         }
       },
       {
-        "HashCode": 1894697080,
+        "HashCode": 1106804968,
         "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.App",
+        "Name": "ArticleShop.Client.Pages.FetchData",
         "AssemblyName": "ArticleShop.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "App"
+            "TagName": "FetchData"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.App",
-          "Common.TypeNameIdentifier": "App",
-          "Common.TypeNamespace": "ArticleShop.Client",
+          "Common.TypeName": "ArticleShop.Client.Pages.FetchData",
+          "Common.TypeNameIdentifier": "FetchData",
+          "Common.TypeNamespace": "ArticleShop.Client.Pages",
           "Runtime.Name": "Components.IComponent"
         }
       },
       {
-        "HashCode": 708745720,
+        "HashCode": 1652482043,
         "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.App",
+        "Name": "ArticleShop.Client.Pages.FetchData",
         "AssemblyName": "ArticleShop.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ArticleShop.Client.App"
+            "TagName": "ArticleShop.Client.Pages.FetchData"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.App",
-          "Common.TypeNameIdentifier": "App",
-          "Common.TypeNamespace": "ArticleShop.Client",
+          "Common.TypeName": "ArticleShop.Client.Pages.FetchData",
+          "Common.TypeNameIdentifier": "FetchData",
+          "Common.TypeNamespace": "ArticleShop.Client.Pages",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
         }
@@ -5149,43 +5149,6 @@
         "Metadata": {
           "Common.TypeName": "ArticleShop.Client.Pages.Counter",
           "Common.TypeNameIdentifier": "Counter",
-          "Common.TypeNamespace": "ArticleShop.Client.Pages",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
-        "HashCode": 1106804968,
-        "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.Pages.FetchData",
-        "AssemblyName": "ArticleShop.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "FetchData"
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.Pages.FetchData",
-          "Common.TypeNameIdentifier": "FetchData",
-          "Common.TypeNamespace": "ArticleShop.Client.Pages",
-          "Runtime.Name": "Components.IComponent"
-        }
-      },
-      {
-        "HashCode": 1652482043,
-        "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.Pages.FetchData",
-        "AssemblyName": "ArticleShop.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "ArticleShop.Client.Pages.FetchData"
-          }
-        ],
-        "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.Pages.FetchData",
-          "Common.TypeNameIdentifier": "FetchData",
           "Common.TypeNamespace": "ArticleShop.Client.Pages",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
@@ -5282,6 +5245,43 @@
         "Metadata": {
           "Common.TypeName": "ArticleShop.Client.Shared.SurveyPrompt",
           "Common.TypeNameIdentifier": "SurveyPrompt",
+          "Common.TypeNamespace": "ArticleShop.Client.Shared",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch",
+          "Runtime.Name": "Components.IComponent"
+        }
+      },
+      {
+        "HashCode": -1402187920,
+        "Kind": "Components.Component",
+        "Name": "ArticleShop.Client.Shared.NavMenu",
+        "AssemblyName": "ArticleShop.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "ArticleShop.Client.Shared.NavMenu",
+          "Common.TypeNameIdentifier": "NavMenu",
+          "Common.TypeNamespace": "ArticleShop.Client.Shared",
+          "Runtime.Name": "Components.IComponent"
+        }
+      },
+      {
+        "HashCode": -1958347011,
+        "Kind": "Components.Component",
+        "Name": "ArticleShop.Client.Shared.NavMenu",
+        "AssemblyName": "ArticleShop.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ArticleShop.Client.Shared.NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Common.TypeName": "ArticleShop.Client.Shared.NavMenu",
+          "Common.TypeNameIdentifier": "NavMenu",
           "Common.TypeNamespace": "ArticleShop.Client.Shared",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
@@ -5394,38 +5394,38 @@
         }
       },
       {
-        "HashCode": -1402187920,
+        "HashCode": 1894697080,
         "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.Shared.NavMenu",
+        "Name": "ArticleShop.Client.App",
         "AssemblyName": "ArticleShop.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "NavMenu"
+            "TagName": "App"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.Shared.NavMenu",
-          "Common.TypeNameIdentifier": "NavMenu",
-          "Common.TypeNamespace": "ArticleShop.Client.Shared",
+          "Common.TypeName": "ArticleShop.Client.App",
+          "Common.TypeNameIdentifier": "App",
+          "Common.TypeNamespace": "ArticleShop.Client",
           "Runtime.Name": "Components.IComponent"
         }
       },
       {
-        "HashCode": -1958347011,
+        "HashCode": 708745720,
         "Kind": "Components.Component",
-        "Name": "ArticleShop.Client.Shared.NavMenu",
+        "Name": "ArticleShop.Client.App",
         "AssemblyName": "ArticleShop.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ArticleShop.Client.Shared.NavMenu"
+            "TagName": "ArticleShop.Client.App"
           }
         ],
         "Metadata": {
-          "Common.TypeName": "ArticleShop.Client.Shared.NavMenu",
-          "Common.TypeNameIdentifier": "NavMenu",
-          "Common.TypeNamespace": "ArticleShop.Client.Shared",
+          "Common.TypeName": "ArticleShop.Client.App",
+          "Common.TypeNameIdentifier": "App",
+          "Common.TypeNamespace": "ArticleShop.Client",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch",
           "Runtime.Name": "Components.IComponent"
         }
