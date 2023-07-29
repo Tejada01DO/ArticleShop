@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {}
+    "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {}
   },
   "projects": {
-    "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
+    "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+        "projectUniqueName": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
         "projectName": "ArticleShop.Client",
-        "projectPath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+        "projectPath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "c:\\ArticleShop\\Client\\obj\\",
+        "outputPath": "C:\\ArticleShop\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
-                "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
+              "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+                "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
               }
             }
           }
@@ -85,14 +85,14 @@
         }
       }
     },
-    "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {
+    "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+        "projectUniqueName": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
         "projectName": "ArticleShop.Server",
-        "projectPath": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+        "projectPath": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "c:\\ArticleShop\\Server\\obj\\",
+        "outputPath": "C:\\ArticleShop\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -109,11 +109,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
-                "projectPath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
+              "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
+                "projectPath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
               },
-              "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
-                "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
+              "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+                "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
               }
             }
           }
@@ -131,6 +131,14 @@
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqLite": {
+              "target": "Package",
+              "version": "[7.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[7.0.9, )"
             }
           },
           "imports": [
@@ -156,14 +164,14 @@
         }
       }
     },
-    "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+    "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectUniqueName": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "projectName": "ArticleShop.Shared",
-        "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "c:\\ArticleShop\\Shared\\obj\\",
+        "outputPath": "C:\\ArticleShop\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
