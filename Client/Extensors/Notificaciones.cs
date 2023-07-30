@@ -1,6 +1,6 @@
 using Radzen;
 
-namespace Proyecto_Final.Client.Extensors
+namespace ArticleShop.Client.Extensors
 {
     public static class Notificaciones
     {

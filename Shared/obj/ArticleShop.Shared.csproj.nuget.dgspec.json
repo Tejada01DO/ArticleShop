@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {}
+    "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {}
   },
   "projects": {
-    "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+    "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectUniqueName": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "projectName": "ArticleShop.Shared",
-        "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "C:\\ArticleShop\\Shared\\obj\\",
+        "outputPath": "c:\\ArticleShop\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
