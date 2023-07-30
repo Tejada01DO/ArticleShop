@@ -6,7 +6,7 @@ public class Compras
     [Key]
 
     public int CompraId { get; set; }
-    public DateTime FechaDeCompra { get; set; } = DateTime.Today; 
+    public DateTime FechaDeCompra { get; set; } = DateTime.Now; 
     public string? Nombre { get; set; }
     public int ArticuloId { get; set; }
     public int CantidadProducida { get; set; }
@@ -24,11 +24,11 @@ public class ComprasDetalle
     public int CompraId { get; set; }
     public int ArticuloId { get; set; }
     public int CantidadUtilizada { get; set; }
-    public double Costo { get; set; }
+    public double Precio { get; set; }
 
     [NotMapped]
     public double? Importe
     {
-        get { return CantidadUtilizada * Costo; }
+        get { return CantidadUtilizada * Precio; }
     }
 }

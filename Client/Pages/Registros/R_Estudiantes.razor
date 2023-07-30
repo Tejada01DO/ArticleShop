@@ -15,10 +15,14 @@
             <div class="card-body">
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
                     <label>ID Compra: </label>
-                    <div class="input-group mb-3">
-                        <InputNumber @bind-Value="compras.CompraId" class="form-control" aria-describedby="Buscar"/>
-                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class="oi oi-magnifying-glass"/></button>
-                    </div>
+                        <div class="input-group mb-3">
+                            <InputNumber @bind-Value="compras.CompraId" class="form-control" aria-describedby="Buscar"/>
+                            <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class="oi oi-magnifying-glass"/></button>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-end">
+                            <InputDate @bind-Value="compras.FechaDeCompra" class="form-control"></InputDate>
+                        </div>
                 </div>
 
                 <div class="mb-3">
@@ -60,8 +64,8 @@
                                 <th>Articulo ID</th>
                                 <th>Descripcion</th>
                                 <th>Cantidad</th>
-                                <th>Fecha de Compra del Articulo</th>
-                                <th>Fecha de Venta</th>
+                                <th>Precio</th>
+                                <th>Importe</th>
                             </tr>
                         </thead>
 
@@ -69,14 +73,13 @@
                             @foreach (var item in this.compras.CompraDetalle)
                             {
                                 var articulo = ObtenerArticulos(item.ArticuloId);
-                                var compra = ObtenerCompra(item.CompraId);
                                 <tr>
-                                    <td><img src="@articulo.Imagen" /></td>
+                                    <td><img src="@articulo.Imagen" width="60px" height="60px" /></td>
                                     <td>@item.ArticuloId</td>
-                                    <td>@ObtenerArticulos(item.ArticuloId)</td>
+                                    <td>@ObtenerDescripcion(item.ArticuloId)</td>
                                     <td>@item.CantidadUtilizada</td>
-                                    <td>@articulo.Fecha</td>
-                                    <td>@compra.FechaDeCompra</td>
+                                    <td>@articulo.Precio</td>
+                                    <td>@item.Importe</td>
                                     <td><button type="button" class="btn btn-danger" @onclick=@(() => EliminarDetalle(item))><i class="oi oi-trash" /></button></td>
                                 </tr>
                             }
@@ -86,7 +89,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-6">
                             <label>Total</label>
-                            <input disabled @bind-value="Total" class="form-control"/>
+                            <input disabled @bind-value="TotalPrecio" class="form-control"/>
                         </div>
                     </div>
                 </fieldset>
@@ -112,6 +115,7 @@
     public Articulos articulos { get; set; } = new Articulos();
     public ComprasDetalle comprasDetalle { get; set; } = new ComprasDetalle();
     public int Total { get; set; }
+    public double? TotalPrecio { get; set; }
     public int Cantidad { get; set; }
     public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
     public List<Compras> L_Compras { get; set; } = new List<Compras>();
@@ -154,13 +158,16 @@
             if(compraEncontrada != null)
             {
                 int Suma = 0;
+                double? Suma1 = 0;
                 this.compras = compraEncontrada;
                 this.compras.CompraDetalle = compraEncontrada.CompraDetalle.ToList();
 
                 foreach(var item in compras.CompraDetalle)
                 {
                     Suma += item.CantidadUtilizada;
+                    Suma1 += item.Importe;
                     Total = Suma;
+                    TotalPrecio = Suma1;
                 }
 
                 StateHasChanged();
@@ -193,12 +200,38 @@
 
     public bool Validar()
     {
-        return compras.CantidadProducida > 0 && compras.Total > 0;
+        if(compras.CantidadProducida < 0)
+        {
+            return false;
+        }
+        if(compras.Total < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
-
+    
     public bool ValidarDetalle()
     {
-        return comprasDetalle.ArticuloId > 0 && comprasDetalle.CantidadUtilizada > 0 && comprasDetalle.Costo > 0;
+        if(comprasDetalle.ArticuloId < 0)
+        {
+            return false;
+        }
+        if(comprasDetalle.CantidadUtilizada < 0)
+        {
+            return false;
+        }
+        if(comprasDetalle.Precio < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public async Task Guardar()
@@ -270,6 +303,7 @@
             if(compras != null)
             {
                 int Suma = 0;
+                double? Suma1 = 0;
 
                 if(comprasDetalle.CantidadUtilizada > articulo.Existencia)
                 {
@@ -278,6 +312,7 @@
                 }
 
                 comprasDetalle.CompraId = compras.CompraId;
+                comprasDetalle.Precio = articulo.Precio;
                 compras.CompraDetalle.Add(comprasDetalle);
                 comprasDetalle = new ComprasDetalle();
                 notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha guardado correctamente", NotificationSeverity.Success);
@@ -285,7 +320,9 @@
                 foreach(var item in compras.CompraDetalle)
                 {
                     Suma += item.CantidadUtilizada;
+                    Suma1 += item.Importe;
                     Total = Suma;
+                    TotalPrecio = Suma1;
                 }
             }
         }
@@ -303,9 +340,8 @@
         return articulo;
     }
 
-    public Compras ObtenerCompra(int CompraId)
+    public string ObtenerDescripcion(int ArticuloId)
     {
-        var compra = L_Compras.FirstOrDefault(c => c.CompraId == CompraId);
-        return compra;
+        return L_Articulos.Where(a => a.ArticuloId == ArticuloId).FirstOrDefault().Descripcion;
     }
 }

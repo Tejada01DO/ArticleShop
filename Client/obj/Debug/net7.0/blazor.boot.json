@@ -202,15 +202,15 @@
       "mscorlib.dll": "sha256-qqpKd+W+AFb6UxudEYEKzrz7ma81p5LrWUwPBVvHV4U=",
       "netstandard.dll": "sha256-OYYuPT3JUknj4LdYIa58zF7kDB3tCnLzjCSuhEjtKXM=",
       "System.Private.CoreLib.dll": "sha256-EVS7zPxPV\/41g2mzPwdXtwiigWxI\/SeAHme1IgyD6tc=",
-      "ArticleShop.Shared.dll": "sha256-ot8lMkTCJFC0CXdWxQzQNpzLi5EERhOnZNNIBSpEutU=",
-      "ArticleShop.Client.dll": "sha256-7QX+WXfFDtw6a9gCep3n7UYRO5GlKG7orcexpiEloV8="
+      "ArticleShop.Shared.dll": "sha256-Y7SOx\/u1hM3pOTGGfowtb2ue0HnVBgqcpzQDJPMikSQ=",
+      "ArticleShop.Client.dll": "sha256-HkD1MVY\/4Jf4qBY6RtpueFsy6ax7ig+D0ZyvBQ+NBjk="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "ArticleShop.Shared.pdb": "sha256-nf4TeSDF9Y+40cAj5kaMZQY4ulwclBBrk0D0jTYugNE=",
-      "ArticleShop.Client.pdb": "sha256-IO0EgNOG+lKQn+hFzC5X4cMmo39D2SROkf4Dm0xu8vY="
+      "ArticleShop.Shared.pdb": "sha256-boVIcOnhIoX55FQhsfvIRKp1lXHGmHsXEgo3tIxRaiY=",
+      "ArticleShop.Client.pdb": "sha256-nhZ33xdMPye2iQ7vXgfGcXbfg8u+iHBoEsUuiIYDR0w="
     },
     "runtime": {
       "dotnet.7.0.5.bw8obut9ec.js": "sha256-codB25EodaFEP43MDCfMBuKXU4LqurUKnQrpoMIFnPs=",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "679XHnkhcBpDfTiI0L6UdO+oBbUnL+TkZ/e6cDYGMJvHgHbFhyRAaKbMWkepqcvzx0e0tFDnfsTcg8RfLLTX+g==",
+  "dgSpecHash": "2+jyaF/LoqUyDhuVUbVRbj3xmd3G1/znEWdE5eqW3pTw9CsmUSrTEWWIDlmewx6gm9Cpzx4gaC6gKd/q25oCMA==",
   "success": true,
-  "projectFilePath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+  "projectFilePath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.sessionstorage\\2.3.0\\blazored.sessionstorage.2.3.0.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\libsassbuilder\\2.0.1\\libsassbuilder.2.0.1.nupkg.sha512",

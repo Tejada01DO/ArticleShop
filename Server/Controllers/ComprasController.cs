@@ -51,7 +51,7 @@ namespace ArticleShop.Server.Controllers
 
             foreach(var item in compra.CompraDetalle)
             {
-                Console.WriteLine($"{item.DetalleId}, {item.CompraId}, {item.ArticuloId}, {item.CantidadUtilizada}, {item.Costo}");
+                Console.WriteLine($"{item.DetalleId}, {item.CompraId}, {item.ArticuloId}, {item.CantidadUtilizada}, {item.Precio}");
             }
 
             return compra;
