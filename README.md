@@ -5,19 +5,19 @@ Administrador:
 
 Correo: admin@gmail.com
 
-contraseña: admin
+Contraseña: admin
 
 Empleado:
 
 Correo: empleado@gmail.com
 
-contraseña: nuevoEmpleado
+Contraseña: nuevoEmpleado
 
 Estudiante:
 
 Correo: estudiante@gmail.com
 
-contraseña: nuevoEstudiante
+Contraseña: nuevoEstudiante
 
 Tanto el administrador como el empleado tienen permisos de ver todos los registros como las consultas pero el estudiante solo tiene permisos para visualizar el Registro de Ventas llamado Tienda de Articulos y Articulos Comprados
 
