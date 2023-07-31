@@ -15,7 +15,7 @@ contraseña: nuevoEstudiante
 
 Tanto el administrador como el empleado tienen permisos de ver todos los registros como las consultas pero el estudiante solo tiene permisos para visualizar el Registro de Ventas llamado Tienda de Articulos y Articulos Comprados
 
-Registros:
+**Registros:**
 
 R_Estudiantes: Se le puede llamar Registros de Ventas donde los estudiantes compran sus articulos, al momento del estudiante compra los articulos se le restan a los Articulos Disponibles.
 
@@ -23,7 +23,7 @@ R_Compras: Donde la tienda de articulos en caso de que quiera comprar articulos 
 
 R_Articulos: Donde la tienda puede comprar articulos que no esten en la tienda, estos se agregan a la base de datos de la lista de articulos.
 
-Consultas:
+**Consultas:**
 
 C_Estudiantes: Donde se guardan todos los datos de la compra que hizo el estudiante (venta de la tienda), cuenta con una opcion de ver que te lleva directamente al Registro de Ventas con todos sus datos.
 
