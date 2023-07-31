@@ -9,73 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = ArticleShop.Client
 build_property.RootNamespace = ArticleShop.Client
-build_property.ProjectDir = C:\ArticleShop\Client\
+build_property.ProjectDir = c:\ArticleShop\Client\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\ArticleShop\Client
+build_property.MSBuildProjectDirectory = c:\ArticleShop\Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/ArticleShop/Client/App.razor]
+[c:/ArticleShop/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Consultas/C_Articulos.razor]
+[c:/ArticleShop/Client/Pages/Consultas/C_Articulos.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfQXJ0aWN1bG9zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Consultas/C_Compras.razor]
+[c:/ArticleShop/Client/Pages/Consultas/C_Compras.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfQ29tcHJhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Consultas/C_Estudiantes.razor]
+[c:/ArticleShop/Client/Pages/Consultas/C_Estudiantes.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfRXN0dWRpYW50ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ArticleShop/Client/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ArticleShop/Client/Pages/Index.razor]
+[c:/ArticleShop/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Login.razor]
+[c:/ArticleShop/Client/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Registros/R_Articulos.razor]
+[c:/ArticleShop/Client/Pages/Registros/R_Articulos.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFJfQXJ0aWN1bG9zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Registros/R_Compras.razor]
+[c:/ArticleShop/Client/Pages/Registros/R_Compras.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFJfQ29tcHJhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Pages/Registros/R_Estudiantes.razor]
+[c:/ArticleShop/Client/Pages/Registros/R_Estudiantes.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFJfRXN0dWRpYW50ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Shared/LoginLayout.razor]
+[c:/ArticleShop/Client/Shared/LoginLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Shared/SurveyPrompt.razor]
+[c:/ArticleShop/Client/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/_Imports.razor]
+[c:/ArticleShop/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ArticleShop/Client/Shared/MainLayout.razor]
+[c:/ArticleShop/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-s7516mipaz
 
-[C:/ArticleShop/Client/Shared/NavMenu.razor]
+[c:/ArticleShop/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-a1eccw8pgb

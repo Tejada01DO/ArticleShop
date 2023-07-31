@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {}
+    "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {}
   },
   "projects": {
-    "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
+    "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+        "projectUniqueName": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
         "projectName": "ArticleShop.Client",
-        "projectPath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+        "projectPath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "C:\\ArticleShop\\Client\\obj\\",
+        "outputPath": "c:\\ArticleShop\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
-                "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
+              "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+                "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
               }
             }
           }
@@ -97,14 +97,14 @@
         }
       }
     },
-    "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {
+    "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+        "projectUniqueName": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
         "projectName": "ArticleShop.Server",
-        "projectPath": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+        "projectPath": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "C:\\ArticleShop\\Server\\obj\\",
+        "outputPath": "c:\\ArticleShop\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -121,11 +121,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
-                "projectPath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
+              "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
+                "projectPath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
               },
-              "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
-                "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
+              "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+                "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
               }
             }
           }
@@ -178,14 +178,14 @@
         }
       }
     },
-    "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+    "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectUniqueName": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "projectName": "ArticleShop.Shared",
-        "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+        "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
         "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-        "outputPath": "C:\\ArticleShop\\Shared\\obj\\",
+        "outputPath": "c:\\ArticleShop\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",

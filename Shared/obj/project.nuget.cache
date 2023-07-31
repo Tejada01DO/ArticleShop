@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V9PLR8Wv1uClF1A8F3dB7jAHypjD35SPF+HZd6I5oFB+Dql+uLhT4sQlpQZus06KsFkmWab9DohVtcqCO7vWyg==",
+  "dgSpecHash": "H/AHNU5463P1u1AxAxHakE5DnjxKcnHdMnKT4jGoDMTM2b4+Hi8sDuvji+XweMVoC+gY/r6xhhfj924/k0f0/w==",
   "success": true,
-  "projectFilePath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
+  "projectFilePath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
