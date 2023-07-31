@@ -4,6 +4,7 @@ public class Context : DbContext
 {
     public DbSet<Articulos> Articulos { get; set; }
     public DbSet<Compras> Compras { get; set; }
+    public DbSet<Ventas> Ventas { get; set; }
     public DbSet<Entrada> Entradas { get; set; }
     public DbSet<Salida> Salidas { get; set; }
     public DbSet<LoginDTO> LoginDTO { get; set; }
@@ -24,6 +25,7 @@ public class Context : DbContext
                 ArticuloId = 1,
                 Descripcion = "Lapiz",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 7,
                 Precio = 10,
                 Existencia = 500,
                 Categoria = "Utiles escolares"
@@ -35,6 +37,7 @@ public class Context : DbContext
                 ArticuloId = 2,
                 Descripcion = "Lapiceros",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 10,
                 Precio = 15,
                 Existencia = 500,
                 Categoria = "Utiles escolares",
@@ -42,10 +45,11 @@ public class Context : DbContext
 
             new Articulos
             {
-                Imagen = "https://w7.pngwing.com/pngs/556/494/png-transparent-eraser-eraser-angle-pencil-rectangle-thumbnail.png",
+                Imagen = "https://raulperez.tieneblog.net/wp-content/uploads/2015/02/goma-de-borrar.jpg",
                 ArticuloId = 3,
                 Descripcion = "Borras",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 8,
                 Precio = 15,
                 Existencia = 600,
                 Categoria = "Utiles escolares"
@@ -57,6 +61,7 @@ public class Context : DbContext
                 ArticuloId = 4,
                 Descripcion = "Cuadernos",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 40,
                 Precio = 60,
                 Existencia = 300,
                 Categoria = "Utiles escolares"
@@ -64,10 +69,11 @@ public class Context : DbContext
 
             new Articulos
             {
-                Imagen = "https://e7.pngegg.com/pngimages/16/228/png-clipart-ruler-ruler-thumbnail.png",
+                Imagen = "https://images.vexels.com/media/users/3/212457/isolated/preview/40771eb8012d98083f41f19abb89c171-icono-plano-regla-recta-verde.png",
                 ArticuloId = 5,
                 Descripcion = "Reglas",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 30,
                 Precio = 50,
                 Existencia = 300,
                 Categoria = "Utiles escolares"
@@ -79,6 +85,7 @@ public class Context : DbContext
                 ArticuloId = 6,
                 Descripcion = "Carpetas",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 15,
                 Precio = 30,
                 Existencia = 600,
                 Categoria = "Utiles escolares"
@@ -90,6 +97,7 @@ public class Context : DbContext
                 ArticuloId = 7,
                 Descripcion = "Pegamentos",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 35,
                 Precio = 50,
                 Existencia = 350,
                 Categoria = "Utiles escolares"
@@ -101,6 +109,7 @@ public class Context : DbContext
                 ArticuloId = 8,
                 Descripcion = "Tijeras",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 40,
                 Precio = 60,
                 Existencia = 300,
                 Categoria = "Utiles escolares"
@@ -112,6 +121,7 @@ public class Context : DbContext
                 ArticuloId = 9,
                 Descripcion = "Marcadores",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 35,
                 Precio = 50,
                 Existencia = 500,
                 Categoria = "Utiles escolares"
@@ -123,6 +133,7 @@ public class Context : DbContext
                 ArticuloId = 10,
                 Descripcion = "Resaltadores",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 35,
                 Precio = 50,
                 Existencia = 500,
                 Categoria = "Utiles escolares"
@@ -134,6 +145,7 @@ public class Context : DbContext
                 ArticuloId = 11,
                 Descripcion = "Compases",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 45,
                 Precio = 60,
                 Existencia = 500,
                 Categoria = "Utiles escolares"
@@ -145,6 +157,7 @@ public class Context : DbContext
                 ArticuloId = 12,
                 Descripcion = "Calculadoras",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 100,
                 Precio = 150,
                 Existencia = 350,
                 Categoria = "Utiles escolares"
@@ -156,6 +169,7 @@ public class Context : DbContext
                 ArticuloId = 13,
                 Descripcion = "Mochilas",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 225,
                 Precio = 300,
                 Existencia = 300,
                 Categoria = "Utiles escolares"
@@ -167,6 +181,7 @@ public class Context : DbContext
                 ArticuloId = 14,
                 Descripcion = "Papeles",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 2,
                 Precio = 5,
                 Existencia = 2500,
                 Categoria = "Utiles escolares"
@@ -178,6 +193,7 @@ public class Context : DbContext
                 ArticuloId = 15,
                 Descripcion = "Sobres",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 7,
                 Precio = 15,
                 Existencia = 2000,
                 Categoria = "Utiles escolares"
@@ -189,6 +205,7 @@ public class Context : DbContext
                 ArticuloId = 16,
                 Descripcion = "Pegatinas",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 20,
                 Precio = 35,
                 Existencia = 1500,
                 Categoria = "Utiles escolares"
@@ -200,6 +217,7 @@ public class Context : DbContext
                 ArticuloId = 17,
                 Descripcion = "Rotuladores",
                 Fecha = new DateTime(2023, 07, 20),
+                Costo = 45,
                 Precio = 60,
                 Existencia = 500,
                 Categoria = "Utiles escolares"

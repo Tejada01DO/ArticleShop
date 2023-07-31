@@ -7,8 +7,11 @@ public class Compras
 
     public int CompraId { get; set; }
     public DateTime FechaDeCompra { get; set; } = DateTime.Now; 
+    [Required(ErrorMessage = "Escriba el nombre del comprador")]
     public string? Nombre { get; set; }
+    [Required(ErrorMessage = "El ID articulo es obligatorio")]
     public int ArticuloId { get; set; }
+    [Required(ErrorMessage = "La cantidad a producir es un campo obligatorio")]
     public int CantidadProducida { get; set; }
     public double Total { get; set; }
 
@@ -31,4 +34,9 @@ public class ComprasDetalle
     {
         get { return CantidadUtilizada * Precio; }
     }
+}
+
+public class Ventas : Compras
+{
+    
 }

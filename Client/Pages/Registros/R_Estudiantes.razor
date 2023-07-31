@@ -1,34 +1,34 @@
 @page "/RegistroEstudiantes"
-@page "/RegistroEstudiantes/{CompraId:int}"
+@page "/RegistroEstudiantes/{VentaId:int}"
 @inject HttpClient httpClient
 @inject NotificationService notify
 
-<EditForm model="compras" OnInvalidSubmit="Guardar">
+<EditForm model="ventas" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 
     <div class="container">
-        <div class="card shador-lg">
+        <div class="card shadow-lg">
             <div class="card-header">
-                <h3>Compras De Articulos</h3>
+                <h3>Ventas De Articulos</h3>
             </div>
 
             <div class="card-body">
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
                     <label>ID Compra: </label>
                         <div class="input-group mb-3">
-                            <InputNumber @bind-Value="compras.CompraId" class="form-control" aria-describedby="Buscar"/>
+                            <InputNumber @bind-Value="ventas.CompraId" class="form-control" aria-describedby="Buscar"/>
                             <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class="oi oi-magnifying-glass"/></button>
                         </div>
 
                         <div class="col-6 d-flex justify-content-end">
-                            <InputDate @bind-Value="compras.FechaDeCompra" class="form-control"></InputDate>
+                            <InputDate @bind-Value="ventas.FechaDeCompra" class="form-control"></InputDate>
                         </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="Nombre">Nombre del Comprador</label>
-                    <InputText @bind-Value="compras.Nombre" class="form-control"/>
-                    <ValidationMessage For="@(() => compras.Nombre)" />
+                    <InputText @bind-Value="ventas.Nombre" class="form-control"/>
+                    <ValidationMessage For="@(() => ventas.Nombre)" />
                 </div>
 
                 <hr>
@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <label>Articulos:</label>
                             <InputSelect @bind-Value="comprasDetalle.ArticuloId" class="form-select">
-                                <option value="@compras.ArticuloId" hidden="hidden">Seleccione un Articulo</option>
+                                <option value="@ventas.ArticuloId" hidden="hidden">Seleccione un Articulo</option>
                                 @foreach (var item in L_Articulos)
                                 {
                                     <option value="@item.ArticuloId">@item.Descripcion</option>
@@ -70,7 +70,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in this.compras.CompraDetalle)
+                            @foreach (var item in this.ventas.CompraDetalle)
                             {
                                 var articulo = ObtenerArticulos(item.ArticuloId);
                                 <tr>
@@ -110,15 +110,14 @@
 {
     [Parameter]
 
-    public int CompraId { get; set; }
-    public Compras compras { get; set; } = new Compras();
+    public int VentaId { get; set; }
+    public Ventas ventas { get; set; } = new Ventas();
     public Articulos articulos { get; set; } = new Articulos();
     public ComprasDetalle comprasDetalle { get; set; } = new ComprasDetalle();
     public int Total { get; set; }
     public double? TotalPrecio { get; set; }
     public int Cantidad { get; set; }
     public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
-    public List<Compras> L_Compras { get; set; } = new List<Compras>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -129,23 +128,23 @@
             L_Articulos = articulo;
         }
 
-        if(CompraId > 0)
+        if(VentaId > 0)
         {
-            this.compras.CompraId = CompraId;
+            this.ventas.CompraId = VentaId;
             await this.Buscar();
         }
     }
 
     public void Nuevo()
     {
-        this.compras = new Compras();
-        Total = 0;
+        this.ventas = new Ventas();
+        TotalPrecio = 0;
     }
 
     public void Limpiar()
     {
-        this.compras = new Compras();
-        Total = 0;
+        this.ventas = new Ventas();
+        TotalPrecio = 0;
         notify.ShowNotification(titulo: "Nuevo", mensaje: "Se ha limpiado correctamente", NotificationSeverity.Info);
     }
 
@@ -153,16 +152,16 @@
     {
         try
         {
-            var compraEncontrada = await httpClient.GetFromJsonAsync<Compras>($"api/Compras/{compras.CompraId}");
+            var ventaEncontrada = await httpClient.GetFromJsonAsync<Ventas>($"api/Ventas/{ventas.CompraId}");
             
-            if(compraEncontrada != null)
+            if(ventaEncontrada != null)
             {
                 int Suma = 0;
                 double? Suma1 = 0;
-                this.compras = compraEncontrada;
-                this.compras.CompraDetalle = compraEncontrada.CompraDetalle.ToList();
+                this.ventas = ventaEncontrada;
+                this.ventas.CompraDetalle = ventaEncontrada.CompraDetalle.ToList();
 
-                foreach(var item in compras.CompraDetalle)
+                foreach(var item in ventas.CompraDetalle)
                 {
                     Suma += item.CantidadUtilizada;
                     Suma1 += item.Importe;
@@ -186,7 +185,7 @@
         }
     }
 
-    private async Task<Articulos> BuscarCompra(int ArticuloId)
+    private async Task<Articulos> BuscarVentas(int ArticuloId)
     {
         var articulo = await httpClient.GetFromJsonAsync<Articulos>($"api/Articulos/{ArticuloId}");
 
@@ -200,11 +199,11 @@
 
     public bool Validar()
     {
-        if(compras.CantidadProducida < 0)
+        if(ventas.CantidadProducida < 0)
         {
             return false;
         }
-        if(compras.Total < 0)
+        if(ventas.Total < 0)
         {
             return false;
         }
@@ -236,8 +235,8 @@
 
     public async Task Guardar()
     {
-        compras.CompraDetalle = this.compras.CompraDetalle.ToList();
-        using var response = await httpClient.PostAsJsonAsync("api/Compras", compras);
+        ventas.CompraDetalle = this.ventas.CompraDetalle.ToList();
+        using var response = await httpClient.PostAsJsonAsync("api/Ventas", ventas);
 
         if(Validar())
         {
@@ -245,11 +244,11 @@
             {
                 if(response.IsSuccessStatusCode)
                 {
-                    var compraDevuelta = await response.Content.ReadFromJsonAsync<Compras>();
+                    var ventaDevuelta = await response.Content.ReadFromJsonAsync<Ventas>();
                     
-                    if(compraDevuelta is not null)
+                    if(ventaDevuelta is not null)
                     {
-                        this.compras = compraDevuelta;
+                        this.ventas = ventaDevuelta;
                         Nuevo();
                         notify.ShowNotification(titulo: "Guardado", mensaje: "Se ha guardado correctamente", NotificationSeverity.Success);
                     }
@@ -268,7 +267,7 @@
 
     public async Task Eliminar()
     {
-        using var response = await httpClient.DeleteAsync($"api/Compras/{compras.CompraId}");
+        using var response = await httpClient.DeleteAsync($"api/Ventas/{ventas.CompraId}");
 
         if(Validar())
         {
@@ -298,9 +297,9 @@
                 return;
             }
 
-            var articulo = await BuscarCompra(comprasDetalle.ArticuloId);
+            var articulo = await BuscarVentas(comprasDetalle.ArticuloId);
 
-            if(compras != null)
+            if(ventas != null)
             {
                 int Suma = 0;
                 double? Suma1 = 0;
@@ -311,13 +310,13 @@
                     return;
                 }
 
-                comprasDetalle.CompraId = compras.CompraId;
+                comprasDetalle.CompraId = ventas.CompraId;
                 comprasDetalle.Precio = articulo.Precio;
-                compras.CompraDetalle.Add(comprasDetalle);
+                ventas.CompraDetalle.Add(comprasDetalle);
                 comprasDetalle = new ComprasDetalle();
                 notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha guardado correctamente", NotificationSeverity.Success);
 
-                foreach(var item in compras.CompraDetalle)
+                foreach(var item in ventas.CompraDetalle)
                 {
                     Suma += item.CantidadUtilizada;
                     Suma1 += item.Importe;
@@ -330,8 +329,8 @@
 
     public void EliminarDetalle(ComprasDetalle detalle)
     {
-        this.compras.CompraDetalle.Remove(detalle);
-        Total = this.compras.CompraDetalle.Sum(t => t.CantidadUtilizada);
+        this.ventas.CompraDetalle.Remove(detalle);
+        TotalPrecio = this.ventas.CompraDetalle.Sum(t => t.Importe);
     }
 
     public Articulos ObtenerArticulos(int ArticuloId)

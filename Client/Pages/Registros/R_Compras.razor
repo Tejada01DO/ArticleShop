@@ -2,3 +2,345 @@
 @page "/RegitroCompras/{CompraId:int}"
 @inject HttpClient httpClient
 @inject NotificationService notify
+
+<EditForm model="compras" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Compras De Articulos</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>ID Compra: </label>
+                        <div class="input-group mb-3">
+                            <InputNumber @bind-Value="compras.CompraId" class="form-control" aria-describedby="Buscar"/>
+                            <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class="oi oi-magnifying-glass"/></button>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-end">
+                            <InputDate @bind-Value="compras.FechaDeCompra" class="form-control"></InputDate>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Nombre">Nombre del Suplidor</label>
+                    <InputText @bind-Value="compras.Nombre" class="form-control"/>
+                    <ValidationMessage For="@(() => compras.Nombre)" />
+                </div>
+
+                <hr>
+                <fieldset>
+                    <legend>Compra de Articulos</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Articulos:</label>
+                            <InputSelect @bind-Value="comprasDetalle.ArticuloId" class="form-select">
+                                <option value="@compras.ArticuloId" hidden="hidden">Seleccione un Articulo</option>
+                                @foreach (var item in L_Articulos)
+                                {
+                                    <option value="@item.ArticuloId">@item.Descripcion</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => comprasDetalle.ArticuloId)" />
+                        </div>
+
+                        <div class="col-md-5">
+                            <label>Cantidad</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="comprasDetalle.CantidadUtilizada" class="form-control"></InputNumber>
+                                <button type="button" class="btn btn-dark" @onclick="AgregarDetalle">Agregar <i class="oi oi-plus" /></button>
+                                <ValidationMessage For="@(() => comprasDetalle.CantidadUtilizada)" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Articulo ID</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Importe</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in this.compras.CompraDetalle)
+                            {
+                                var articulo = ObtenerArticulos(item.ArticuloId);
+                                <tr>
+                                    <td><img src="@articulo.Imagen" width="60px" height="60px" /></td>
+                                    <td>@item.ArticuloId</td>
+                                    <td>@ObtenerDescripcion(item.ArticuloId)</td>
+                                    <td>@item.CantidadUtilizada</td>
+                                    <td>@item.Precio</td>
+                                    <td>@item.Importe</td>
+                                    <td><button type="button" class="btn btn-danger" @onclick=@(() => EliminarDetalle(item))><i class="oi oi-trash" /></button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6">
+                            <label>Total</label>
+                            <input disabled @bind-value="TotalPrecio" class="form-control"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Limpiar">Nuevo <i class="oi oi-file"/></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document"/></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash"/></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code
+{
+    [Parameter]
+    public int CompraId { get; set; }
+    public Compras compras { get; set; } = new Compras();
+    public Articulos articulos { get; set; }= new Articulos();
+    public ComprasDetalle comprasDetalle { get; set; } = new ComprasDetalle();
+    public int Total { get; set; }
+    public double? TotalPrecio { get; set; }
+    public int Cantidad { get; set; }
+    public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var articulo = await httpClient.GetFromJsonAsync<List<Articulos>>("api/Articulos");
+
+        if(articulo is not null)
+        {
+            L_Articulos = articulo;
+        }
+
+        if(CompraId > 0)
+        {
+            this.compras.CompraId = CompraId;
+            await this.Buscar();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.compras = new Compras();
+        TotalPrecio = 0;
+    }
+
+    public void Limpiar()
+    {
+        this.compras = new Compras();
+        TotalPrecio = 0;
+        notify.ShowNotification(titulo: "Nuevo", mensaje: "Se ha limpiado correctamente", NotificationSeverity.Info);
+    }
+
+    public async Task<bool> Buscar()
+    {
+        try
+        {
+            var compraEncontrada = await httpClient.GetFromJsonAsync<Compras>($"api/Compras/{compras.CompraId}");
+            
+            if(compraEncontrada != null)
+            {
+                int Suma = 0;
+                double? Suma1 = 0;
+                this.compras = compraEncontrada;
+                this.compras.CompraDetalle = compraEncontrada.CompraDetalle.ToList();
+
+                foreach(var item in compras.CompraDetalle)
+                {
+                    Suma += item.CantidadUtilizada;
+                    Suma1 += item.Importe;
+                    Total = Suma;
+                    TotalPrecio = Suma1;
+                }
+
+                StateHasChanged();
+                notify.ShowNotification(titulo: "Encontrado", mensaje: "La compra se ha encontrado con exito", NotificationSeverity.Success);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            notify.ShowNotification(titulo: "No encontrado", mensaje: "Esa compra no existe, intentelo de nuevo", NotificationSeverity.Warning);
+            return false;
+        }
+    }
+
+    private async Task<Articulos> BuscarCompras(int ArticuloId)
+    {
+        var articulo = await httpClient.GetFromJsonAsync<Articulos>($"api/Articulos/{ArticuloId}");
+
+        if(articulo == null)
+        {
+            return new Articulos();
+        }
+
+        return articulo;
+    }
+
+    public bool Validar()
+    {
+        if(compras.CantidadProducida < 0)
+        {
+            return false;
+        }
+        if(compras.Total < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    public bool ValidarDetalle()
+    {
+        if(comprasDetalle.ArticuloId < 0)
+        {
+            return false;
+        }
+        if(comprasDetalle.CantidadUtilizada < 0)
+        {
+            return false;
+        }
+        if(comprasDetalle.Precio < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public async Task Guardar()
+    {
+        compras.CompraDetalle = this.compras.CompraDetalle.ToList();
+        using var response = await httpClient.PostAsJsonAsync("api/Compras", compras);
+
+        if(Validar())
+        {
+            if(ValidarDetalle())
+            {
+                if(response.IsSuccessStatusCode)
+                {
+                    var compraDevuelta = await response.Content.ReadFromJsonAsync<Compras>();
+                    
+                    if(compraDevuelta is not null)
+                    {
+                        this.compras = compraDevuelta;
+                        Nuevo();
+                        notify.ShowNotification(titulo: "Guardado", mensaje: "Se ha guardado correctamente", NotificationSeverity.Success);
+                    }
+                    else
+                    {
+                        notify.ShowNotification(titulo: "Error", mensaje: "No hay nada para guardar", NotificationSeverity.Error);
+                    }
+                }
+                else
+                {
+                    notify.ShowNotification(titulo: "Error", mensaje: "Ha occurido un error, intentelo de nuevo", NotificationSeverity.Warning);
+                }
+            }
+        }
+    }
+
+    public async Task Eliminar()
+    {
+        using var response = await httpClient.DeleteAsync($"api/Compras/{compras.CompraId}");
+
+        if(Validar())
+        {
+            if(ValidarDetalle())
+            {
+                if(!response.IsSuccessStatusCode)
+                {
+                    notify.ShowNotification(titulo: "Error", mensaje: "No hay nada por eliminar", NotificationSeverity.Warning);
+                    return;
+                }
+                else
+                {
+                    Nuevo();
+                    notify.ShowNotification(titulo: "Eliminado", mensaje: "La compra se ha eliminado correctamente", NotificationSeverity.Error);
+                }
+            }
+        }
+    }
+
+    public async Task AgregarDetalle()
+    {
+        if(ValidarDetalle())
+        {
+            if(comprasDetalle.CantidadUtilizada <= 0)
+            {
+                notify.ShowNotification(titulo: "Error", mensaje: "La cantidad a utilizar debe ser mayor a cero", NotificationSeverity.Warning);
+                return;
+            }
+
+            var articulo = await BuscarCompras(comprasDetalle.ArticuloId);
+
+            if(compras != null)
+            {
+                int Suma = 0;
+                double? Suma1 = 0;
+
+                if(comprasDetalle.CantidadUtilizada > articulo.Existencia)
+                {
+                    notify.ShowNotification(titulo: "Error", mensaje: "La cantidad utilizada es mayor que la cantidad del producto", NotificationSeverity.Warning);
+                    return;
+                }
+
+                comprasDetalle.CompraId = compras.CompraId;
+                comprasDetalle.Precio = articulo.Costo;
+                compras.CompraDetalle.Add(comprasDetalle);
+                comprasDetalle = new ComprasDetalle();
+                notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha guardado correctamente", NotificationSeverity.Success);
+
+                foreach(var item in compras.CompraDetalle)
+                {
+                    Suma += item.CantidadUtilizada;
+                    Suma1 += item.Importe;
+                    Total = Suma;
+                    TotalPrecio = Suma1;
+                }
+            }
+        }
+    }
+
+    public void EliminarDetalle(ComprasDetalle detalle)
+    {
+        this.compras.CompraDetalle.Remove(detalle);
+        TotalPrecio = this.compras.CompraDetalle.Sum(t => t.Importe);
+    }
+
+    public Articulos ObtenerArticulos(int ArticuloId)
+    {
+        var articulo = L_Articulos.FirstOrDefault(a => a.ArticuloId == ArticuloId);
+        return articulo;
+    }
+
+    public string ObtenerDescripcion(int ArticuloId)
+    {
+        return L_Articulos.Where(a => a.ArticuloId == ArticuloId).FirstOrDefault().Descripcion;
+    }
+
+}

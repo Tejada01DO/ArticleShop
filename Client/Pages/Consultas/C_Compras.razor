@@ -1,0 +1,66 @@
+@page "/ConsultaCompras"
+@inject HttpClient httpClient
+
+<label>ID</label>
+<div class="input-group">
+    <InputNumber @bind-Value="compras.CompraId" class="form-control"></InputNumber>
+    <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+    <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+</div>
+
+@if (L_Compras != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <th>Compra ID</th>
+            <th>Fecha de Compra</th>
+            <th>Nombre Del Suplidor</th>
+            <th></th>
+        </thead>
+
+        <tbody>
+            @foreach (var item in L_Compras)
+            {
+                <tr>
+                    <th>@item.CompraId</th>
+                    <th>@item.FechaDeCompra.ToString("dd/MM/yyyy")</th>
+                    <th>@item.Nombre</th>
+                    <th><a href="RegistroCompras/@item.CompraId"><span class="oi oi-eye"></span></a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    public int Conteo { get; set; }
+    public Compras compras { get; set; } = new Compras();
+    public List<Compras> L_Compras { get; set; } = new List<Compras>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var compra = await httpClient.GetFromJsonAsync<List<Compras>>($"api/Compras");
+
+        if(compra is not null)
+        {
+            L_Compras = compra;
+        }
+    }
+
+    public async Task Buscar()
+    {
+        L_Compras = L_Compras.Where(o => o.CompraId == compras.CompraId).ToList();
+
+        Conteo = L_Compras != null ? L_Compras!.Count() : 0;
+        StateHasChanged();
+    }
+
+    public async Task Reiniciar()
+    {
+        L_Compras = await httpClient.GetFromJsonAsync<List<Compras>>($"api/Compras");
+
+        Conteo = L_Compras != null ? L_Compras!.Count() : 0;
+        StateHasChanged();
+    }
+}

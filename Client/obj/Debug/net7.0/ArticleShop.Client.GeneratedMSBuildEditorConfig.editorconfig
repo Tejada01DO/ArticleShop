@@ -20,6 +20,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ArticleShop/Client/Pages/Consultas/C_Articulos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfQXJ0aWN1bG9zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ArticleShop/Client/Pages/Consultas/C_Compras.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfQ29tcHJhcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ArticleShop/Client/Pages/Consultas/C_Estudiantes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfRXN0dWRpYW50ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ArticleShop/Client/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,6 +46,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ArticleShop/Client/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ArticleShop/Client/Pages/Registros/R_Articulos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFJfQXJ0aWN1bG9zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ArticleShop/Client/Pages/Registros/R_Compras.razor]

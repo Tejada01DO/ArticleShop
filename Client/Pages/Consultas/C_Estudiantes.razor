@@ -1,0 +1,66 @@
+@page "/ConsultaVentas"
+@inject HttpClient httpClient
+
+<label>ID</label>
+<div class="input-group">
+    <InputNumber @bind-Value="ventas.CompraId" class="form-control"></InputNumber>
+    <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+    <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+</div>
+
+@if (L_Ventas != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <th>Compra ID</th>
+            <th>Fecha de Compra</th>
+            <th>Nombre</th>
+            <th></th>
+        </thead>
+
+        <tbody>
+            @foreach (var item in L_Ventas)
+            {
+                <tr>
+                    <th>@item.CompraId</th>
+                    <th>@item.FechaDeCompra.ToString("dd/MM/yyyy")</th>
+                    <th>@item.Nombre</th>
+                    <th><a href="RegistroEstudiantes/@item.CompraId"><span class="oi oi-eye"></span></a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    public int Conteo { get; set; }
+    public Ventas ventas { get; set; } = new Ventas();
+    public List<Ventas> L_Ventas { get; set; } = new List<Ventas>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var venta = await httpClient.GetFromJsonAsync<List<Ventas>>($"api/Ventas");
+
+        if(venta is not null)
+        {
+            L_Ventas = venta;
+        }
+    }
+
+    public async Task Buscar()
+    {
+        L_Ventas = L_Ventas.Where(o => o.CompraId == ventas.CompraId).ToList();
+
+        Conteo = L_Ventas != null ? L_Ventas!.Count() : 0;
+        StateHasChanged();
+    }
+
+    public async Task Reiniciar()
+    {
+        L_Ventas = await httpClient.GetFromJsonAsync<List<Ventas>>($"api/Ventas");
+
+        Conteo = L_Ventas != null ? L_Ventas!.Count() : 0;
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,73 @@
+@page "/ConsultaArticulos"
+@inject HttpClient httpClient
+
+
+<label>ID</label>
+<div class="input-group">
+    <InputNumber @bind-Value="articulos.ArticuloId" class="form-control"></InputNumber>
+    <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+    <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+</div>
+
+@if (L_Articulos != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <th>Imagen</th>
+            <th>Articulo ID</th>
+            <th>Descripcion</th>
+            <th>Fecha</th>
+            <th>Precio</th>
+            <th>Existencia</th>
+            <th>Categoria</th>
+        </thead>
+
+        <tbody>
+            @foreach (var item in L_Articulos)
+            {
+                <tr>
+                    <th><img src="@item.Imagen" width="60px" height="60px" /></th>
+                    <th>@item.ArticuloId</th>
+                    <th>@item.Descripcion</th>
+                    <th>@item.Fecha.ToString("dd/MM/yyyy")</th>
+                    <th>@item.Precio</th>
+                    <th>@item.Existencia</th>
+                    <th>@item.Categoria</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    public int Conteo { get; set; }
+    public Articulos articulos { get; set; } = new Articulos();
+    public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var articulo = await httpClient.GetFromJsonAsync<List<Articulos>>("api/Articulos");
+
+        if(articulo is not null)
+        {
+            L_Articulos = articulo;
+        }
+    }
+
+    public async Task Buscar()
+    {
+        L_Articulos = L_Articulos.Where(a => a.ArticuloId == articulos.ArticuloId).ToList();
+
+        Conteo = L_Articulos != null ? L_Articulos!.Count() : 0;
+        StateHasChanged();
+    }
+
+    public async Task Reiniciar()
+    {
+        L_Articulos = await httpClient.GetFromJsonAsync<List<Articulos>>($"api/Articulos");
+
+        Conteo = L_Articulos != null ? L_Articulos!.Count() : 0;
+        StateHasChanged();
+    }
+}

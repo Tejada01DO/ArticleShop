@@ -1,0 +1,201 @@
+@page "/RegistroArticulos"
+@page "/RegistroArticulos/{ArticuloId:int}"
+@inject HttpClient httpClient
+@inject NotificationService notify
+
+<EditForm model="articulos" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class ="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Ingreso de Articulos</h3>
+            </div>
+            <div class=card-body>
+
+                <div class= "col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>ID Articulo:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value ="articulos.ArticuloId" class="form-control" aria-describedby="Buscar"/>
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class ="oi oi-magnifying-glass"/></button>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="Descripcion">Descripción:</label>
+                    <InputText @bind-Value="articulos.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => articulos.Descripcion)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Precio">Precio:</label>
+                    <InputNumber @bind-Value="articulos.Precio" class="form-control"/>
+                    <ValidationMessage For="@(() => articulos.Precio)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Cantidad">Cantidad:</label>
+                    <InputNumber @bind-Value="articulos.Existencia" class="form-control"/>
+                    <ValidationMessage For="@(() => articulos.Existencia)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Costo">Costo:</label>
+                    <InputNumber @bind-Value="articulos.Costo" class="form-control"/>
+                    <ValidationMessage For="@(() => articulos.Costo)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Categoria">Categoria:</label>
+                    <InputText @bind-Value="articulos.Categoria" class="form-control"/>
+                    <ValidationMessage For="@(() => articulos.Categoria)" />
+                </div>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Limpiar">Nuevo <i class="oi oi-file"/></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document"/></button>
+                    <button type="button" class="btn btn-outline-danger"@onclick="Eliminar">Eliminar <i class="oi oi-trash"/></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+@code
+{
+    [Parameter]
+    public int ArticuloId { get; set; }
+    public Articulos articulos { get; set; } = new Articulos();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(ArticuloId > 0)
+        {
+            this.articulos.ArticuloId = ArticuloId;
+            await this.Buscar();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.articulos = new Articulos();
+    }
+
+    public void Limpiar()
+    {
+        this.articulos = new Articulos();
+        notify.ShowNotification(titulo: "Nuevo", mensaje: "Se ha limpiado correctamente", NotificationSeverity.Info);
+    }
+
+    public async Task<bool> Buscar()
+    {
+        try
+        {
+            var articuloEncontrado = await httpClient.GetFromJsonAsync<Articulos>($"api/Articulos/{articulos.ArticuloId}");
+
+            if (articuloEncontrado != null)
+            {
+                this.articulos = articuloEncontrado;
+                StateHasChanged();
+                notify.ShowNotification(titulo: "Encontrado", mensaje: "El artículo se ha encontrado con éxito", NotificationSeverity.Success);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "Ese articulo no existe, inténtelo de nuevo", NotificationSeverity.Warning);
+            return false;
+        }
+    }
+
+
+    public async Task Guardar()
+    {
+        if (!Validar())
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "Debe completar todos los campos correctamente", NotificationSeverity.Warning);
+            return;
+        }
+
+        using var respuesta = await httpClient.PostAsJsonAsync("api/Articulos", articulos);
+
+        if (respuesta.IsSuccessStatusCode)
+        {
+            var articuloDevuelto = await respuesta.Content.ReadFromJsonAsync<Articulos>();
+
+            if (articuloDevuelto is not null)
+            {
+                articulos = articuloDevuelto;
+                StateHasChanged();
+                Nuevo();
+                notify.ShowNotification(titulo: "Guardado", mensaje: "Se ha guardado correctamente", NotificationSeverity.Success);
+            }
+        }
+        else
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "No se pudo guardar el artículo, intentelo de nuevo", NotificationSeverity.Error);
+        }
+    }
+
+
+    public bool Validar()
+    {
+        if(string.IsNullOrEmpty(articulos.Descripcion))
+        {
+            return false;
+        }
+        if(articulos.Precio < 0)
+        {
+            return false;
+        }
+        if(articulos.Cantidad < 0)
+        {
+            return false;
+        }
+        if(articulos.Existencia < 0)
+        {
+            return false;
+        }
+        if(string.IsNullOrEmpty(articulos.Categoria))
+        {
+            return false;
+        }
+        if(articulos.Costo < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public async Task Eliminar()
+    {
+        if(articulos.ArticuloId <= 0)
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "No hay nada por eliminar", NotificationSeverity.Warning);
+            return;
+        }
+
+        using var respuesta = await httpClient.DeleteAsync($"api/Articulos/{articulos.ArticuloId}");
+
+        if(respuesta.IsSuccessStatusCode)
+        {
+            Nuevo();
+            notify.ShowNotification(titulo: "Eliminado", mensaje: "Se ha eliminado correctamente", NotificationSeverity.Error);
+        }
+        else
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "No se pudo eliminar el artículo", NotificationSeverity.Warning);
+        }
+    }
+}
+

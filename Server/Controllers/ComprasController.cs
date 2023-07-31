@@ -30,6 +30,7 @@ namespace ArticleShop.Server.Controllers
             }
             else
             {
+                
                 return await _context.Compras.ToListAsync();
             }
         }
@@ -49,11 +50,6 @@ namespace ArticleShop.Server.Controllers
                 return NotFound();
             }
 
-            foreach(var item in compra.CompraDetalle)
-            {
-                Console.WriteLine($"{item.DetalleId}, {item.CompraId}, {item.ArticuloId}, {item.CantidadUtilizada}, {item.Precio}");
-            }
-
             return compra;
         }
 
@@ -70,7 +66,7 @@ namespace ArticleShop.Server.Controllers
 
                     if(articulos != null)
                     {
-                        articulos.Existencia -= ArticuloVacio.CantidadUtilizada;
+                        articulos.Existencia += ArticuloVacio.CantidadUtilizada;
                         _context.Articulos.Update(articulos);
                         await _context.SaveChangesAsync();
                         _context.Entry(articulos).State = EntityState.Detached;
@@ -95,7 +91,7 @@ namespace ArticleShop.Server.Controllers
 
                             if(articulos != null)
                             {
-                                articulos.Existencia += ArticuloVacio.CantidadUtilizada;
+                                articulos.Existencia -= ArticuloVacio.CantidadUtilizada;
                                 _context.Articulos.Update(articulos);
                                 await _context.SaveChangesAsync();
                                 _context.Entry(articulos).State = EntityState.Detached;
@@ -110,7 +106,7 @@ namespace ArticleShop.Server.Controllers
 
                     if(articulos != null)
                     {
-                        articulos.Existencia -= compraAnterior.CantidadProducida;
+                        articulos.Existencia += compraAnterior.CantidadProducida;
                         _context.Articulos.Update(articulos);
                         await _context.SaveChangesAsync();
                         _context.Entry(articulos).State = EntityState.Detached;
@@ -125,7 +121,7 @@ namespace ArticleShop.Server.Controllers
 
                     if(articulos != null)
                     {
-                        articulos.Existencia -= ArticuloVacio.CantidadUtilizada;
+                        articulos.Existencia += ArticuloVacio.CantidadUtilizada;
                         _context.Articulos.Update(articulos);
                         await _context.SaveChangesAsync();
                         _context.Entry(articulos).State = EntityState.Detached;
@@ -137,7 +133,7 @@ namespace ArticleShop.Server.Controllers
 
                 if(articulos != null)
                 {
-                    articulos.Existencia += compras.CantidadProducida;
+                    articulos.Existencia -= compras.CantidadProducida;
                     _context.Articulos.Update(articulos);
                     await _context.SaveChangesAsync();
                     _context.Entry(articulos).State = EntityState.Detached;
@@ -155,7 +151,7 @@ namespace ArticleShop.Server.Controllers
         {
             var compra = await _context.Compras.Include(c => c.CompraDetalle).FirstOrDefaultAsync(c => c.CompraId == CompraId);
 
-            if(compra != null)
+            if(compra == null)
             {
                 return NotFound();
             }
@@ -166,7 +162,7 @@ namespace ArticleShop.Server.Controllers
 
                 if(articulos != null)
                 {
-                    articulos.Existencia += ArticuloVacio.CantidadUtilizada;
+                    articulos.Existencia -= ArticuloVacio.CantidadUtilizada;
                     _context.Articulos.Update(articulos);
                 }
             }
@@ -175,7 +171,7 @@ namespace ArticleShop.Server.Controllers
 
             if(articuloInicial != null)
             {
-                articuloInicial.Existencia += compra.CantidadProducida;
+                articuloInicial.Existencia -= compra.CantidadProducida;
                 _context.Articulos.Update(articuloInicial);
             }
 
