@@ -19,7 +19,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
                     <label>ID Compra: </label>
                         <div class="input-group mb-3">
-                            <InputNumber @bind-Value="ventas.CompraId" class="form-control" aria-describedby="Buscar"/>
+                            <InputNumber @bind-Value="ventas.VentaId" class="form-control" aria-describedby="Buscar"/>
                             <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="Buscar"><i class="oi oi-magnifying-glass"/></button>
                         </div>
 
@@ -40,22 +40,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Articulos:</label>
-                            <InputSelect @bind-Value="comprasDetalle.ArticuloId" class="form-select">
+                            <InputSelect @bind-Value="ventasDetalle.ArticuloId" class="form-select">
                                 <option value="@ventas.ArticuloId" hidden="hidden">Seleccione un Articulo</option>
                                 @foreach (var item in L_Articulos)
                                 {
                                     <option value="@item.ArticuloId">@item.Descripcion</option>
                                 }
                             </InputSelect>
-                            <ValidationMessage For="@(() => comprasDetalle.ArticuloId)" />
+                            <ValidationMessage For="@(() => ventasDetalle.ArticuloId)" />
                         </div>
 
                         <div class="col-md-5">
                             <label>Cantidad</label>
                             <div class="input-group">
-                                <InputNumber @bind-Value="comprasDetalle.CantidadUtilizada" class="form-control"></InputNumber>
+                                <InputNumber @bind-Value="ventasDetalle.CantidadUtilizada" class="form-control"></InputNumber>
                                 <button type="button" class="btn btn-dark" @onclick="AgregarDetalle">Agregar <i class="oi oi-plus" /></button>
-                                <ValidationMessage For="@(() => comprasDetalle.CantidadUtilizada)" />
+                                <ValidationMessage For="@(() => ventasDetalle.CantidadUtilizada)" />
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in this.ventas.CompraDetalle)
+                            @foreach (var item in this.ventas.ventasDetalles)
                             {
                                 var articulo = ObtenerArticulos(item.ArticuloId);
                                 <tr>
@@ -116,7 +116,7 @@
     public int VentaId { get; set; }
     public Ventas ventas { get; set; } = new Ventas();
     public Articulos articulos { get; set; } = new Articulos();
-    public ComprasDetalle comprasDetalle { get; set; } = new ComprasDetalle();
+    public VentasDetalle ventasDetalle { get; set; } = new VentasDetalle();
     public int Total { get; set; }
     public double? TotalPrecio { get; set; }
     public int Cantidad { get; set; }
@@ -133,7 +133,7 @@
 
         if(VentaId > 0)
         {
-            this.ventas.CompraId = VentaId;
+            this.ventas.VentaId = VentaId;
             await this.Buscar();
         }
     }
@@ -155,16 +155,16 @@
     {
         try
         {
-            var ventaEncontrada = await httpClient.GetFromJsonAsync<Ventas>($"api/Ventas/{ventas.CompraId}");
+            var ventaEncontrada = await httpClient.GetFromJsonAsync<Ventas>($"api/Ventas/{ventas.VentaId}");
             
             if(ventaEncontrada != null)
             {
                 int Suma = 0;
                 double? Suma1 = 0;
                 this.ventas = ventaEncontrada;
-                this.ventas.CompraDetalle = ventaEncontrada.CompraDetalle.ToList();
+                this.ventas.ventasDetalles = ventaEncontrada.ventasDetalles.ToList();
 
-                foreach(var item in ventas.CompraDetalle)
+                foreach(var item in ventas.ventasDetalles)
                 {
                     Suma += item.CantidadUtilizada;
                     Suma1 += item.Importe;
@@ -218,15 +218,15 @@
     
     public bool ValidarDetalle()
     {
-        if(comprasDetalle.ArticuloId < 0)
+        if(ventasDetalle.ArticuloId < 0)
         {
             return false;
         }
-        if(comprasDetalle.CantidadUtilizada < 0)
+        if(ventasDetalle.CantidadUtilizada < 0)
         {
             return false;
         }
-        if(comprasDetalle.Precio < 0)
+        if(ventasDetalle.Precio < 0)
         {
             return false;
         }
@@ -238,7 +238,7 @@
 
     public async Task Guardar()
     {
-        ventas.CompraDetalle = this.ventas.CompraDetalle.ToList();
+        ventas.ventasDetalles = this.ventas.ventasDetalles.ToList();
         using var response = await httpClient.PostAsJsonAsync("api/Ventas", ventas);
 
         if(Validar())
@@ -270,7 +270,7 @@
 
     public async Task Eliminar()
     {
-        using var response = await httpClient.DeleteAsync($"api/Ventas/{ventas.CompraId}");
+        using var response = await httpClient.DeleteAsync($"api/Ventas/{ventas.VentaId}");
 
         if(Validar())
         {
@@ -294,32 +294,32 @@
     {
         if(ValidarDetalle())
         {
-            if(comprasDetalle.CantidadUtilizada <= 0)
+            if(ventasDetalle.CantidadUtilizada <= 0)
             {
                 notify.ShowNotification(titulo: "Error", mensaje: "La cantidad a utilizar debe ser mayor a cero", NotificationSeverity.Warning);
                 return;
             }
 
-            var articulo = await BuscarVentas(comprasDetalle.ArticuloId);
+            var articulo = await BuscarVentas(ventasDetalle.ArticuloId);
 
             if(ventas != null)
             {
                 int Suma = 0;
                 double? Suma1 = 0;
 
-                if(comprasDetalle.CantidadUtilizada > articulo.Existencia)
+                if(ventasDetalle.CantidadUtilizada > articulo.Existencia)
                 {
                     notify.ShowNotification(titulo: "Error", mensaje: "La cantidad utilizada es mayor que la cantidad del producto", NotificationSeverity.Warning);
                     return;
                 }
 
-                comprasDetalle.CompraId = ventas.CompraId;
-                comprasDetalle.Precio = articulo.Precio;
-                ventas.CompraDetalle.Add(comprasDetalle);
-                comprasDetalle = new ComprasDetalle();
+                ventasDetalle.VentaId = ventas.VentaId;
+                ventasDetalle.Precio = articulo.Precio;
+                ventas.ventasDetalles.Add(ventasDetalle);
+                ventasDetalle = new VentasDetalle();
                 notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha agregado correctamente", NotificationSeverity.Success);
 
-                foreach(var item in ventas.CompraDetalle)
+                foreach(var item in ventas.ventasDetalles)
                 {
                     Suma += item.CantidadUtilizada;
                     Suma1 += item.Importe;
@@ -330,10 +330,10 @@
         }
     }
 
-    public void EliminarDetalle(ComprasDetalle detalle)
+    public void EliminarDetalle(VentasDetalle detalle)
     {
-        this.ventas.CompraDetalle.Remove(detalle);
-        TotalPrecio = this.ventas.CompraDetalle.Sum(t => t.Importe);
+        this.ventas.ventasDetalles.Remove(detalle);
+        TotalPrecio = this.ventas.ventasDetalles.Sum(t => t.Importe);
     }
 
     public Articulos ObtenerArticulos(int ArticuloId)

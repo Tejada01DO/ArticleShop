@@ -18,7 +18,7 @@ namespace ArticleShop.Client.Controllers
 
         public bool Existe(int VentaId)
         {
-            return (_context.Ventas?.Any(v => v.CompraId == VentaId)).GetValueOrDefault();
+            return (_context.Ventas?.Any(v => v.VentaId == VentaId)).GetValueOrDefault();
         }
 
         [HttpGet]
@@ -42,16 +42,16 @@ namespace ArticleShop.Client.Controllers
                 return NotFound();
             }
 
-            var venta = await _context.Ventas.Include(v => v.CompraDetalle).Where(v => v.CompraId == VentaId).FirstOrDefaultAsync();
+            var venta = await _context.Ventas.Include(v => v.ventasDetalles).Where(v => v.VentaId == VentaId).FirstOrDefaultAsync();
 
             if(venta == null)
             {
                 return NotFound();
             }
 
-            foreach(var item in venta.CompraDetalle)
+            foreach(var item in venta.ventasDetalles)
             {
-                Console.WriteLine($"{item.DetalleId}, {item.CompraId}, {item.ArticuloId}, {item.CantidadUtilizada}, {item.Precio}");
+                Console.WriteLine($"{item.DetalleId}, {item.VentaId}, {item.ArticuloId}, {item.CantidadUtilizada}, {item.Precio}");
             }
 
             return venta;
@@ -60,11 +60,11 @@ namespace ArticleShop.Client.Controllers
         [HttpPost]
         public async Task<ActionResult<Ventas>> PostVentas(Ventas ventas)
         {
-            if(!Existe(ventas.CompraId))
+            if(!Existe(ventas.VentaId))
             {
                 Articulos? articulos = new Articulos();
 
-                foreach(var ArticuloVacio in ventas.CompraDetalle)
+                foreach(var ArticuloVacio in ventas.ventasDetalles)
                 {
                     articulos = _context.Articulos.Find(ArticuloVacio.ArticuloId);
 
@@ -80,14 +80,14 @@ namespace ArticleShop.Client.Controllers
             }
             else
             {
-                var ventaAnterior = _context.Ventas.Include(c => c.CompraDetalle).AsNoTracking()
-                .FirstOrDefault(c => c.CompraId == ventas.CompraId);
+                var ventaAnterior = _context.Ventas.Include(v => v.ventasDetalles).AsNoTracking()
+                .FirstOrDefault(v => v.VentaId == ventas.VentaId);
 
                 Articulos? articulos = new Articulos();
 
-                if(ventaAnterior != null && ventaAnterior.CompraDetalle != null)
+                if(ventaAnterior != null && ventaAnterior.ventasDetalles != null)
                 {
-                    foreach(var ArticuloVacio in ventaAnterior.CompraDetalle)
+                    foreach(var ArticuloVacio in ventaAnterior.ventasDetalles)
                     {
                         if(ArticuloVacio != null)
                         {
@@ -117,9 +117,9 @@ namespace ArticleShop.Client.Controllers
                     }
                 }
 
-                _context.Database.ExecuteSql($"Delete from ComprasDetalle where CompraId = {ventas.CompraId}");
+                _context.Database.ExecuteSql($"Delete from VentasDetalle where VentaId = {ventas.VentaId}");
 
-                foreach(var ArticuloVacio in ventas.CompraDetalle)
+                foreach(var ArticuloVacio in ventas.ventasDetalles)
                 {
                     articulos = _context.Articulos.Find(ArticuloVacio.ArticuloId);
 
@@ -153,14 +153,14 @@ namespace ArticleShop.Client.Controllers
         [HttpDelete("{VentaId}")]
         public async Task<IActionResult> EliminarVenta(int VentaId)
         {
-            var venta = await _context.Ventas.Include(v => v.CompraDetalle).FirstOrDefaultAsync(v => v.CompraId == VentaId);
+            var venta = await _context.Ventas.Include(v => v.ventasDetalles).FirstOrDefaultAsync(v => v.VentaId == VentaId);
 
             if(venta == null)
             {
                 return NotFound();
             }
 
-            foreach(var ArticuloVacio in venta.CompraDetalle)
+            foreach(var ArticuloVacio in venta.ventasDetalles)
             {
                 var articulos = await _context.Articulos.FindAsync(ArticuloVacio.ArticuloId);
 

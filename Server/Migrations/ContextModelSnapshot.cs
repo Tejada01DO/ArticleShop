@@ -271,10 +271,6 @@ namespace ArticleShop.Server.Migrations
                     b.Property<int>("CantidadProducida")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("FechaDeCompra")
                         .HasColumnType("TEXT");
 
@@ -288,10 +284,6 @@ namespace ArticleShop.Server.Migrations
                     b.HasKey("CompraId");
 
                     b.ToTable("Compras");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Compras");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ComprasDetalle", b =>
@@ -319,35 +311,6 @@ namespace ArticleShop.Server.Migrations
                     b.ToTable("ComprasDetalle");
                 });
 
-            modelBuilder.Entity("Entrada", b =>
-                {
-                    b.Property<int>("InventarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cantidad_Anterior")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Motivo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("InventarioId");
-
-                    b.ToTable("Entradas");
-                });
-
             modelBuilder.Entity("LoginDTO", b =>
                 {
                     b.Property<string>("Correo")
@@ -359,35 +322,6 @@ namespace ArticleShop.Server.Migrations
                     b.HasKey("Correo");
 
                     b.ToTable("LoginDTO");
-                });
-
-            modelBuilder.Entity("Salida", b =>
-                {
-                    b.Property<int>("InventarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cantidad_Anterior")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Motivo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("InventarioId");
-
-                    b.ToTable("Salidas");
                 });
 
             modelBuilder.Entity("SesionDTO", b =>
@@ -408,9 +342,54 @@ namespace ArticleShop.Server.Migrations
 
             modelBuilder.Entity("Ventas", b =>
                 {
-                    b.HasBaseType("Compras");
+                    b.Property<int>("VentaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.HasDiscriminator().HasValue("Ventas");
+                    b.Property<int>("ArticuloId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CantidadProducida")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FechaDeCompra")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("VentaId");
+
+                    b.ToTable("Ventas");
+                });
+
+            modelBuilder.Entity("VentasDetalle", b =>
+                {
+                    b.Property<int>("DetalleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ArticuloId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CantidadUtilizada")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Precio")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("VentaId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("DetalleId");
+
+                    b.HasIndex("VentaId");
+
+                    b.ToTable("VentasDetalle");
                 });
 
             modelBuilder.Entity("ComprasDetalle", b =>
@@ -422,9 +401,23 @@ namespace ArticleShop.Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VentasDetalle", b =>
+                {
+                    b.HasOne("Ventas", null)
+                        .WithMany("ventasDetalles")
+                        .HasForeignKey("VentaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Compras", b =>
                 {
                     b.Navigation("CompraDetalle");
+                });
+
+            modelBuilder.Entity("Ventas", b =>
+                {
+                    b.Navigation("ventasDetalles");
                 });
 #pragma warning restore 612, 618
         }

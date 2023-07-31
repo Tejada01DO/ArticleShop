@@ -3,7 +3,7 @@
 
 <label>ID</label>
 <div class="input-group">
-    <InputNumber @bind-Value="ventas.CompraId" class="form-control"></InputNumber>
+    <InputNumber @bind-Value="ventas.VentaId" class="form-control"></InputNumber>
     <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
     <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
 </div>
@@ -22,10 +22,10 @@
             @foreach (var item in L_Ventas)
             {
                 <tr>
-                    <th>@item.CompraId</th>
+                    <th>@item.VentaId</th>
                     <th>@item.FechaDeCompra.ToString("dd/MM/yyyy")</th>
                     <th>@item.Nombre</th>
-                    <th><a href="RegistroEstudiantes/@item.CompraId"><span class="oi oi-eye"></span></a></th>
+                    <th><a href="RegistroEstudiantes/@item.VentaId"><span class="oi oi-eye"></span></a></th>
                 </tr>
             }
         </tbody>
@@ -50,7 +50,7 @@
 
     public async Task Buscar()
     {
-        L_Ventas = L_Ventas.Where(o => o.CompraId == ventas.CompraId).ToList();
+        L_Ventas = L_Ventas.Where(v => v.VentaId == ventas.VentaId).ToList();
 
         Conteo = L_Ventas != null ? L_Ventas!.Count() : 0;
         StateHasChanged();

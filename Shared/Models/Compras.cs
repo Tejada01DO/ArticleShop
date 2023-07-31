@@ -35,8 +35,3 @@ public class ComprasDetalle
         get { return CantidadUtilizada * Precio; }
     }
 }
-
-public class Ventas : Compras
-{
-    
-}
