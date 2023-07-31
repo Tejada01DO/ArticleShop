@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O4OW2Ke2pBMfn9/IxISOjIk7XQR51RjCJR9abTxzXq0=",
+  "Hash": "+uqEjvptA6UkB53kjgyjvRp6bHjuNWuYuymWZHkgiZs=",
   "Source": "ArticleShop.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.sessionstorage\\2.3.0\\lib\\net7.0\\Blazored.SessionStorage.dll"
+    },
+    {
+      "Identity": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.Toast.dll",
+      "SourceId": "ArticleShop.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.Toast.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\lib\\net7.0\\Blazored.Toast.dll"
     },
     {
       "Identity": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\dotnet.7.0.5.bw8obut9ec.js",
@@ -4488,6 +4505,23 @@
       "OriginalItemSpec": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Drawing.dll"
     },
     {
+      "Identity": "C:\\ArticleShop\\Client\\obj\\Debug\\net7.0\\build-gz\\BeQPaJ54.gz",
+      "SourceId": "ArticleShop.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.Toast.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.Toast.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\ArticleShop\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Blazored.Toast.dll"
+    },
+    {
       "Identity": "C:\\ArticleShop\\Client\\obj\\Debug\\net7.0\\build-gz\\BfqnZkjh.gz",
       "SourceId": "ArticleShop.Client",
       "SourceType": "Computed",
@@ -7359,6 +7393,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\Blazored.Toast.bundle.scp.css",
+      "SourceId": "Blazored.Toast",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Toast",
+      "RelativePath": "Blazored.Toast.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\Blazored.Toast.bundle.scp.css"
     },
     {
       "Identity": "C:\\Users\\Robert Tejada\\.nuget\\packages\\radzen.blazor\\4.14.3\\staticwebassets\\css\\dark-base.css",

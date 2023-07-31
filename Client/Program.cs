@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ArticleShop.Client;
 using Radzen;
+using Blazored.Toast;
 
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,6 +17,7 @@ builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
 builder.Services.AddScoped<ContextMenuService>();
+builder.Services.AddBlazoredToast();
 
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<AuthenticationStateProvider, Autenticacion>();

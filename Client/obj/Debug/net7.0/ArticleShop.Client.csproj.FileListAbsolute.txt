@@ -850,3 +850,7 @@ C:\ArticleShop\Client\obj\Debug\net7.0\ArticleShop.Client.dll
 C:\ArticleShop\Client\obj\Debug\net7.0\refint\ArticleShop.Client.dll
 C:\ArticleShop\Client\obj\Debug\net7.0\ArticleShop.Client.pdb
 C:\ArticleShop\Client\obj\Debug\net7.0\ref\ArticleShop.Client.dll
+C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\Blazored.Toast.dll
+C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\Blazored.Toast.dll.gz
+C:\ArticleShop\Client\bin\Debug\net7.0\Blazored.Toast.dll
+C:\ArticleShop\Client\obj\Debug\net7.0\build-gz\BeQPaJ54.gz

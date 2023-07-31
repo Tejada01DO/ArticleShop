@@ -27,11 +27,21 @@ namespace ArticleShop.Server.Controllers
                 sesionDTO.Correo = login.Correo;
                 sesionDTO.Rol = "Administrador";
             }
-            else
+            else if(login.Correo == "empleado@gmail.com" && login.Clave == "nuevoEmpleado")
             {
                 sesionDTO.Nombre = "empleado";
                 sesionDTO.Correo = login.Correo;
                 sesionDTO.Rol = "Empleado";
+            }
+            else if(login.Correo == "estudiante@gmail.com" && login.Clave == "nuevoEstudiante")
+            {
+                sesionDTO.Nombre = "estudiante";
+                sesionDTO.Correo = login.Correo;
+                sesionDTO.Rol = "Estudiante";
+            }
+            else
+            {
+                return NotFound("Ese usuario no esta creado");
             }
 
             return StatusCode(StatusCodes.Status200OK, sesionDTO);

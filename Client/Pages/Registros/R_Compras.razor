@@ -3,6 +3,9 @@
 @inject HttpClient httpClient
 @inject NotificationService notify
 
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize(Roles = "Administrador, Empleado")]
+
 <EditForm model="compras" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 
@@ -258,7 +261,7 @@
                 }
                 else
                 {
-                    notify.ShowNotification(titulo: "Error", mensaje: "Ha occurido un error, intentelo de nuevo", NotificationSeverity.Warning);
+                    notify.ShowNotification(titulo: "Error", mensaje: "Por favor rellene los campos", NotificationSeverity.Warning);
                 }
             }
         }
@@ -313,7 +316,7 @@
                 comprasDetalle.Precio = articulo.Costo;
                 compras.CompraDetalle.Add(comprasDetalle);
                 comprasDetalle = new ComprasDetalle();
-                notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha guardado correctamente", NotificationSeverity.Success);
+                notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha agregado correctamente", NotificationSeverity.Success);
 
                 foreach(var item in compras.CompraDetalle)
                 {

@@ -3,6 +3,9 @@
 @inject HttpClient httpClient
 @inject NotificationService notify
 
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize(Roles = "Administrador, Empleado")]
+
 <EditForm model="articulos" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 

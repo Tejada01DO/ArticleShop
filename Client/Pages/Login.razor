@@ -3,10 +3,10 @@
 
 @inject HttpClient httpClient
 @using ArticleShop.Client.Extensors
-@using ArticleShop.Shared
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider authenticationProvider
 @inject NavigationManager navManager
+@inject NotificationService notify
 
 <div class="row mt-5">
     <div class="col-lg-4 offset-lg-4 border">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="mb-3">
-            <button @onclick="IniciarSesion" class="btn btn-primary">Iniciar Sesion</button>
+            <button type="button" @onclick="IniciarSesion" class="btn btn-primary">Iniciar Sesion</button>
         </div>
     </div>
 </div>
@@ -47,6 +47,13 @@
 
             navManager.NavigateTo("/index");
         }
+        else if(loginResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "Ese usuario no existe", NotificationSeverity.Error);
+        }
+        else
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "Ha ocurrido un error, intentelo de nuevo", NotificationSeverity.Warning);
+        }
     }
-
 }

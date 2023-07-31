@@ -1,4 +1,3 @@
-using ArticleShop.Shared;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;

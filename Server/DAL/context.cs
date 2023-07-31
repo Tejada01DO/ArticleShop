@@ -5,8 +5,6 @@ public class Context : DbContext
     public DbSet<Articulos> Articulos { get; set; }
     public DbSet<Compras> Compras { get; set; }
     public DbSet<Ventas> Ventas { get; set; }
-    public DbSet<Entrada> Entradas { get; set; }
-    public DbSet<Salida> Salidas { get; set; }
     public DbSet<LoginDTO> LoginDTO { get; set; }
     public DbSet<SesionDTO> SesionDTO { get; set; }
 

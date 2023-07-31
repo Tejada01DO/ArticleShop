@@ -1,7 +1,6 @@
 using Blazored.SessionStorage;
 using System.Text.Json;
 using System.Text;
-using ArticleShop.Shared;
 
 namespace ArticleShop.Client.Extensors
 {

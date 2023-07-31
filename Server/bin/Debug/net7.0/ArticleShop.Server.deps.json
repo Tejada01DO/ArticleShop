@@ -29,6 +29,19 @@
           }
         }
       },
+      "Blazored.Toast/4.1.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "7.0.9",
+          "Microsoft.AspNetCore.Components.Web": "7.0.5",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/Blazored.Toast.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -557,6 +570,7 @@
         "dependencies": {
           "ArticleShop.Shared": "1.0.0",
           "Blazored.SessionStorage": "2.3.0",
+          "Blazored.Toast": "4.1.0",
           "Microsoft.AspNetCore.Components.Authorization": "7.0.9",
           "Microsoft.AspNetCore.Components.WebAssembly": "7.0.5",
           "Radzen.Blazor": "4.14.3"
@@ -584,6 +598,13 @@
       "sha512": "sha512-mHKG7M5eTlnaZ7LODcApGcUEds9xozU9Af/NIMTiEEsSV9Efsu41zua+zYx/LVDdtVKcSyKP5MzD2z/TNjmNFw==",
       "path": "blazored.sessionstorage/2.3.0",
       "hashPath": "blazored.sessionstorage.2.3.0.nupkg.sha512"
+    },
+    "Blazored.Toast/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-k12tFBnMMU67bPoBKLTuR2POcYOz02UtT8Lzyeu8fMv587nO8VaWqFfRMJ8Hxkb1SbxL8lY2WiK9tWAZ934khQ==",
+      "path": "blazored.toast/4.1.0",
+      "hashPath": "blazored.toast.4.1.0.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
