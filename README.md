@@ -2,15 +2,21 @@
 Este proyecto cuenta con un login donde se encuentran registrado varios usuarios, los cuales son: Administrador, Empleado y Estudiante, la forma de poder acceder a cada usuario es:
 
 Administrador:
+
 Correo: admin@gmail.com
+
 contraseña: admin
 
 Empleado:
+
 Correo: empleado@gmail.com
+
 contraseña: nuevoEmpleado
 
 Estudiante:
+
 Correo: estudiante@gmail.com
+
 contraseña: nuevoEstudiante
 
 Tanto el administrador como el empleado tienen permisos de ver todos los registros como las consultas pero el estudiante solo tiene permisos para visualizar el Registro de Ventas llamado Tienda de Articulos y Articulos Comprados
