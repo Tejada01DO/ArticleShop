@@ -854,3 +854,7 @@ C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\Blazored.Toast.dll
 C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\Blazored.Toast.dll.gz
 C:\ArticleShop\Client\bin\Debug\net7.0\Blazored.Toast.dll
 C:\ArticleShop\Client\obj\Debug\net7.0\build-gz\BeQPaJ54.gz
+C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\MatBlazor.dll
+C:\ArticleShop\Client\bin\Debug\net7.0\wwwroot\_framework\MatBlazor.dll.gz
+C:\ArticleShop\Client\bin\Debug\net7.0\MatBlazor.dll
+C:\ArticleShop\Client\obj\Debug\net7.0\build-gz\WJTHMJkb.gz

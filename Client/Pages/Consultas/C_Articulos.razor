@@ -2,7 +2,6 @@
 @inject HttpClient httpClient
 @inject NotificationService notify
 
-
 <label>ID</label>
 <div class="input-group">
     <InputNumber @bind-Value="articulos.ArticuloId" class="form-control"></InputNumber>
@@ -43,6 +42,7 @@
 @code
 {
     public int Conteo { get; set; }
+    public string? filtro { get; set; }
     public Articulos articulos { get; set; } = new Articulos();
     public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
 

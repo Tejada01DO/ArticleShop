@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Xkwl9j0b87m3DxSl9xjfNt78Q6xVUaUeIzlt83HDyUXKM2FBVV8EQyicSy5kQ2dEfL9CFzh6D3pRN4LnZsX6rA==",
+  "dgSpecHash": "CvThpbxkpY9DhHI9Mxwau+IvD3+Ai74iGke0CmMKNmMVb5Crbm1WqDQsbgdpW+dA5wiN9jpbb7SnGb4f43Df9Q==",
   "success": true,
-  "projectFilePath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+  "projectFilePath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.sessionstorage\\2.3.0\\blazored.sessionstorage.2.3.0.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\blazored.toast.4.1.0.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\libsassbuilder\\2.0.1\\libsassbuilder.2.0.1.nupkg.sha512",
+    "C:\\Users\\Robert Tejada\\.nuget\\packages\\matblazor\\2.10.0\\matblazor.2.10.0.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.9\\microsoft.aspnetcore.authorization.7.0.9.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.9\\microsoft.aspnetcore.components.7.0.9.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\7.0.9\\microsoft.aspnetcore.components.analyzers.7.0.9.nupkg.sha512",

@@ -53,6 +53,29 @@
           "build/_._": {}
         }
       },
+      "MatBlazor/2.10.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.14",
+          "Microsoft.AspNetCore.Components.Web": "6.0.14"
+        },
+        "compile": {
+          "lib/net6.0/MatBlazor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MatBlazor.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/MatBlazor.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/MatBlazor.props": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/7.0.9": {
         "type": "package",
         "dependencies": {
@@ -982,6 +1005,7 @@
           "ArticleShop.Shared": "1.0.0",
           "Blazored.SessionStorage": "2.3.0",
           "Blazored.Toast": "4.1.0",
+          "MatBlazor": "2.10.0",
           "Microsoft.AspNetCore.Components.Authorization": "7.0.9",
           "Microsoft.AspNetCore.Components.WebAssembly": "7.0.5",
           "Radzen.Blazor": "4.14.3"
@@ -1085,6 +1109,25 @@
         "tool/runtimes/osx-x64/native/libsass.dylib",
         "tool/runtimes/win-x64/native/libsass.dll",
         "tool/x64/libsass.dll"
+      ]
+    },
+    "MatBlazor/2.10.0": {
+      "sha512": "VyxrSrtNxsj4XmFu5QI5CcBGGRMcFXfYmVGrTwuMhRkT052qXQii4c0lSgUMgTo4Ii11dMw/xr1wjosh3mA7LA==",
+      "type": "package",
+      "path": "matblazor/2.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/MatBlazor.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/MatBlazor.props",
+        "buildTransitive/MatBlazor.props",
+        "lib/net6.0/MatBlazor.dll",
+        "lib/net6.0/MatBlazor.xml",
+        "matblazor.2.10.0.nupkg.sha512",
+        "matblazor.nuspec",
+        "staticwebassets/dist/matBlazor.css",
+        "staticwebassets/dist/matBlazor.js"
       ]
     },
     "Microsoft.AspNetCore.Authorization/7.0.9": {
@@ -2340,11 +2383,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+      "projectUniqueName": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
       "projectName": "ArticleShop.Server",
-      "projectPath": "C:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
+      "projectPath": "c:\\ArticleShop\\Server\\ArticleShop.Server.csproj",
       "packagesPath": "C:\\Users\\Robert Tejada\\.nuget\\packages\\",
-      "outputPath": "C:\\ArticleShop\\Server\\obj\\",
+      "outputPath": "c:\\ArticleShop\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Robert Tejada\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2361,11 +2404,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
-              "projectPath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
+            "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj": {
+              "projectPath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj"
             },
-            "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
-              "projectPath": "C:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
+            "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj": {
+              "projectPath": "c:\\ArticleShop\\Shared\\ArticleShop.Shared.csproj"
             }
           }
         }
