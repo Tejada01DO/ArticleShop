@@ -290,41 +290,49 @@
 
     public async Task AgregarDetalle()
     {
-        if(ValidarDetalle())
+        try
         {
-            if(comprasDetalle.CantidadUtilizada <= 0)
+            if(ValidarDetalle())
             {
-                notify.ShowNotification(titulo: "Error", mensaje: "La cantidad a utilizar debe ser mayor a cero", NotificationSeverity.Warning);
-                return;
-            }
-
-            var articulo = await BuscarCompras(comprasDetalle.ArticuloId);
-
-            if(compras != null)
-            {
-                int Suma = 0;
-                double? Suma1 = 0;
-
-                if(comprasDetalle.CantidadUtilizada > articulo.Existencia)
+                if(comprasDetalle.CantidadUtilizada <= 0)
                 {
-                    notify.ShowNotification(titulo: "Error", mensaje: "La cantidad utilizada es mayor que la cantidad del producto", NotificationSeverity.Warning);
+                    notify.ShowNotification(titulo: "Error", mensaje: "La cantidad a utilizar debe ser mayor a cero", NotificationSeverity.Warning);
                     return;
                 }
 
-                comprasDetalle.CompraId = compras.CompraId;
-                comprasDetalle.Precio = articulo.Costo;
-                compras.CompraDetalle.Add(comprasDetalle);
-                comprasDetalle = new ComprasDetalle();
-                notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha agregado correctamente", NotificationSeverity.Success);
+                var articulo = await BuscarCompras(comprasDetalle.ArticuloId);
 
-                foreach(var item in compras.CompraDetalle)
+                if(compras != null)
                 {
-                    Suma += item.CantidadUtilizada;
-                    Suma1 += item.Importe;
-                    Total = Suma;
-                    TotalPrecio = Suma1;
+                    int Suma = 0;
+                    double? Suma1 = 0;
+
+                    if(comprasDetalle.CantidadUtilizada > articulo.Existencia)
+                    {
+                        notify.ShowNotification(titulo: "Error", mensaje: "La cantidad utilizada es mayor que la cantidad del producto", NotificationSeverity.Warning);
+                        return;
+                    }
+
+                    comprasDetalle.CompraId = compras.CompraId;
+                    comprasDetalle.Precio = articulo.Costo;
+                    compras.CompraDetalle.Add(comprasDetalle);
+                    comprasDetalle = new ComprasDetalle();
+                    notify.ShowNotification(titulo: "Compra Agregada", mensaje: "La compra se ha agregado correctamente", NotificationSeverity.Success);
+
+                    foreach(var item in compras.CompraDetalle)
+                    {
+                        Suma += item.CantidadUtilizada;
+                        Suma1 += item.Importe;
+                        Total = Suma;
+                        TotalPrecio = Suma1;
+                    }
                 }
             }
+        }
+        catch
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "Es necesario agregar un producto antes que una cantidad", NotificationSeverity.Error);
+            return;
         }
     }
 
