@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CvThpbxkpY9DhHI9Mxwau+IvD3+Ai74iGke0CmMKNmMVb5Crbm1WqDQsbgdpW+dA5wiN9jpbb7SnGb4f43Df9Q==",
+  "dgSpecHash": "5Y1xtQiohR8LJnpZjg9YX9KrmcXgDa7Y+mkNDCneW2N/0Tpsuif0KcmXi6PbHgxveWqPqF/MFCTKMzWfx3VhaQ==",
   "success": true,
-  "projectFilePath": "c:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
+  "projectFilePath": "C:\\ArticleShop\\Client\\ArticleShop.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.sessionstorage\\2.3.0\\blazored.sessionstorage.2.3.0.nupkg.sha512",
     "C:\\Users\\Robert Tejada\\.nuget\\packages\\blazored.toast\\4.1.0\\blazored.toast.4.1.0.nupkg.sha512",

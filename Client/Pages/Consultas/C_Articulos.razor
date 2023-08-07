@@ -2,14 +2,42 @@
 @inject HttpClient httpClient
 @inject NotificationService notify
 
-<label>ID</label>
-<div class="input-group">
-    <InputNumber @bind-Value="articulos.ArticuloId" class="form-control"></InputNumber>
-    <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
-    <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+<div class="input-group d-flex align-items-end">
+
+    <div class="input-group" style="margin-right: 30px; width: 16rem;">
+        <span class="input-group-text">Filtro</span>
+        <InputSelect class="form-select text-14 col-3" @bind-Value="Filtro">
+            <option value="1" selected>ID</option>
+            <option value="2">Descripci&oacute;n</option>
+            <option value="3">Precio</option>
+            <option value="4">Existencia</option>
+            <option value="5">Categoria</option>
+        </InputSelect>
+    </div>
+
+    <div class="input-group" style=" margin-right: 10px; width: 15rem;">
+        <span class="input-group-text">Desde</span>
+        <InputDate @bind-Value="FechaInicial" class="form-control col-4" />
+    </div>
+
+    <div class="input-group" style=" width: 15rem;">
+        <span class="input-group-text">Hasta</span>
+        <InputDate @bind-Value="FechaFinal" class="form-control col-4" />
+    </div>
+
+    <div class="flex-fill mx-2">
+        <div class="input-group">
+            <span class="input-group-text">Busqueda</span>
+            <input type="text" class="form-control" value="@Criterio" @oninput="ActualizarCriterio"/>
+        </div>
+    </div>
+
+    <button type="button" style="z-index:0;" class="btn btn-primary" @onclick="Buscar">
+        <i class="oi oi-magnifying-glass mr-2" /> Buscar
+    </button>
 </div>
 
-@if (L_Articulos != null)
+@if (ArticulosMostrados != null)
 {
     <table class="table table-bordered">
         <thead>
@@ -23,7 +51,7 @@
         </thead>
 
         <tbody>
-            @foreach (var item in L_Articulos)
+            @foreach (var item in ArticulosMostrados)
             {
                 <tr>
                     <th><img src="@item.Imagen" width="60px" height="60px" /></th>
@@ -42,33 +70,81 @@
 @code
 {
     public int Conteo { get; set; }
-    public string? filtro { get; set; }
+    public int Filtro { get; set; }
+    public string? Criterio { get; set; }
     public Articulos articulos { get; set; } = new Articulos();
     public List<Articulos> L_Articulos { get; set; } = new List<Articulos>();
+    public List<Articulos> ArticulosMostrados { get; set; } = new List<Articulos>();
+    public DateTime FechaInicial { get; set; } = DateTime.Now.AddMonths(-1);
+    public DateTime FechaFinal { get; set; } = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
         var articulo = await httpClient.GetFromJsonAsync<List<Articulos>>("api/Articulos");
 
-        if(articulo is not null)
+        if (articulo is not null)
         {
             L_Articulos = articulo;
+            ArticulosMostrados = L_Articulos;
         }
     }
 
-    public async Task Buscar()
+    public void Buscar()
     {
-        L_Articulos = L_Articulos.Where(a => a.ArticuloId == articulos.ArticuloId).ToList();
+        if(FechaFinal < FechaInicial)
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "La fecha final no puede ser mayor a la fecha inicial", NotificationSeverity.Warning);
+            return;
+        }
+
+        if (!String.IsNullOrEmpty(Criterio))
+        {
+            switch (Filtro)
+            {
+                case 1:
+                    {
+                        ArticulosMostrados = L_Articulos.Where(a => a.ArticuloId == Convert.ToInt32(Criterio)).ToList();
+                        break;
+                    }
+
+                case 2:
+                    {
+                        ArticulosMostrados = L_Articulos.Where(d => d.Descripcion != null &&
+                        d.Descripcion.ToLower().Contains(Criterio.ToLower())).ToList();
+                        break;
+                    }
+
+                case 3:
+                    {
+                        ArticulosMostrados = L_Articulos.Where(p => p.Precio == Convert.ToDouble(Criterio)).ToList();
+                        break;
+                    }
+
+                case 4:
+                    {
+                        ArticulosMostrados = L_Articulos.Where(e => e.Existencia == Convert.ToInt32(Criterio)).ToList();
+                        break;
+                    }
+
+                case 5:
+                    {
+                        ArticulosMostrados = L_Articulos.Where(c => c.Categoria != null && c.Categoria.ToLower().Contains(Criterio.ToLower())).ToList();
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            ArticulosMostrados = L_Articulos;
+        }
 
         Conteo = L_Articulos != null ? L_Articulos!.Count() : 0;
         StateHasChanged();
     }
 
-    public async Task Reiniciar()
+    private void ActualizarCriterio(ChangeEventArgs e)
     {
-        L_Articulos = await httpClient.GetFromJsonAsync<List<Articulos>>($"api/Articulos");
-
-        Conteo = L_Articulos != null ? L_Articulos!.Count() : 0;
-        StateHasChanged();
+        Criterio = e.Value?.ToString();
+        Buscar();
     }
 }

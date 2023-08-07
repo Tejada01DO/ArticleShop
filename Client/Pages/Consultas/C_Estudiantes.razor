@@ -1,14 +1,40 @@
 @page "/ConsultaVentas"
 @inject HttpClient httpClient
+@inject NotificationService notify
 
-<label>ID</label>
-<div class="input-group">
-    <InputNumber @bind-Value="ventas.VentaId" class="form-control"></InputNumber>
-    <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
-    <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+<div class="input-group d-flex align-items-end">
+
+    <div class="input-group" style="margin-right: 30px; width: 16rem;">
+        <span class="input-group-text">Filtro</span>
+        <InputSelect class="form-select text-14 col-3" @bind-Value="Filtro">
+            <option value="1" selected>ID</option>
+            <option value="2">Nombre</option>
+        </InputSelect>
+    </div>
+
+    <div class="input-group" style=" margin-right: 10px; width: 15rem;">
+        <span class="input-group-text">Desde</span>
+        <InputDate @bind-Value="FechaInicial" class="form-control col-4" />
+    </div>
+
+    <div class="input-group" style=" width: 15rem;">
+        <span class="input-group-text">Hasta</span>
+        <InputDate @bind-Value="FechaFinal" class="form-control col-4" />
+    </div>
+
+    <div class="flex-fill mx-2">
+        <div class="input-group">
+            <span class="input-group-text">Busqueda</span>
+            <input type="text" class="form-control" value="@Criterio" @oninput="ActualizarCriterio"/>
+        </div>
+    </div>
+
+    <button type="button" style="z-index:0;" class="btn btn-primary" @onclick="Buscar">
+        <i class="oi oi-magnifying-glass mr-2" /> Buscar
+    </button>
 </div>
 
-@if (L_Ventas != null)
+@if (VentasMostradas != null)
 {
     <table class="table table-bordered">
         <thead>
@@ -19,7 +45,7 @@
         </thead>
 
         <tbody>
-            @foreach (var item in L_Ventas)
+            @foreach (var item in VentasMostradas)
             {
                 <tr>
                     <th>@item.VentaId</th>
@@ -35,8 +61,13 @@
 @code
 {
     public int Conteo { get; set; }
+    public int Filtro { get; set; }
+    public string? Criterio { get; set; }
     public Ventas ventas { get; set; } = new Ventas();
     public List<Ventas> L_Ventas { get; set; } = new List<Ventas>();
+    public List<Ventas> VentasMostradas { get; set; } = new List<Ventas>();
+    public DateTime FechaInicial { get; set; } = DateTime.Now.AddMonths(-1);
+    public DateTime FechaFinal { get; set; } = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
@@ -45,22 +76,47 @@
         if(venta is not null)
         {
             L_Ventas = venta;
+            VentasMostradas = L_Ventas;
         }
     }
 
-    public async Task Buscar()
+    public void Buscar()
     {
-        L_Ventas = L_Ventas.Where(v => v.VentaId == ventas.VentaId).ToList();
+        if(FechaFinal < FechaInicial)
+        {
+            notify.ShowNotification(titulo: "Error", mensaje: "La fecha final no puede ser mayor a la fecha inicial", NotificationSeverity.Warning);
+            return;
+        }
+
+        if (!String.IsNullOrEmpty(Criterio))
+        {
+            switch (Filtro)
+            {
+                case 1:
+                    {
+                        VentasMostradas = L_Ventas.Where(v => v.VentaId == Convert.ToInt32(Criterio)).ToList();
+                        break;
+                    }
+
+                case 2:
+                    {
+                        VentasMostradas = L_Ventas.Where(n => n.Nombre != null && n.Nombre.ToLower().Contains(Criterio.ToLower())).ToList();
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            VentasMostradas = L_Ventas;
+        }
 
         Conteo = L_Ventas != null ? L_Ventas!.Count() : 0;
         StateHasChanged();
     }
 
-    public async Task Reiniciar()
+    private void ActualizarCriterio(ChangeEventArgs e)
     {
-        L_Ventas = await httpClient.GetFromJsonAsync<List<Ventas>>($"api/Ventas");
-
-        Conteo = L_Ventas != null ? L_Ventas!.Count() : 0;
-        StateHasChanged();
+        Criterio = e.Value?.ToString();
+        Buscar();
     }
 }
