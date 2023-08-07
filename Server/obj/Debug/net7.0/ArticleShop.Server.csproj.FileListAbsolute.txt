@@ -94,5 +94,5 @@ C:\ArticleShop\Server\obj\Debug\net7.0\ArticleShop.Server.pdb
 C:\ArticleShop\Server\obj\Debug\net7.0\ArticleShop.Server.genruntimeconfig.cache
 C:\ArticleShop\Server\obj\Debug\net7.0\ref\ArticleShop.Server.dll
 C:\ArticleShop\Server\bin\Debug\net7.0\Blazored.Toast.dll
-C:\ArticleShop\Server\bin\Debug\net7.0\Data\Database.Db
 C:\ArticleShop\Server\bin\Debug\net7.0\MatBlazor.dll
+C:\ArticleShop\Server\bin\Debug\net7.0\Data\Database.Db
