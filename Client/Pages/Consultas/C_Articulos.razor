@@ -77,6 +77,8 @@
     public List<Articulos> ArticulosMostrados { get; set; } = new List<Articulos>();
     public DateTime FechaInicial { get; set; } = DateTime.Now.AddMonths(-1);
     public DateTime FechaFinal { get; set; } = DateTime.Now;
+    private CancellationTokenSource? cancellationTokenSource;
+    private TimeSpan retrasoDeBusqueda = TimeSpan.FromMilliseconds(200);
 
     protected override async Task OnInitializedAsync()
     {
@@ -103,32 +105,67 @@
             {
                 case 1:
                     {
-                        ArticulosMostrados = L_Articulos.Where(a => a.ArticuloId == Convert.ToInt32(Criterio)).ToList();
+                        if(int.TryParse(Criterio, out int ID))
+                        {
+                            ArticulosMostrados = L_Articulos.Where(a => a.ArticuloId == ID).ToList();
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para ID debe ser un numero valido", NotificationSeverity.Error);
+                        }
                         break;
                     }
 
                 case 2:
                     {
-                        ArticulosMostrados = L_Articulos.Where(d => d.Descripcion != null &&
-                        d.Descripcion.ToLower().Contains(Criterio.ToLower())).ToList();
+                        if(!double.TryParse(Criterio, out double _))
+                        {
+                            ArticulosMostrados = L_Articulos.Where(d => d.Descripcion != null &&
+                            d.Descripcion.ToLower().Contains(Criterio.ToLower())).ToList();
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para descripcion no puede ser un numero", NotificationSeverity.Error);
+                        }
                         break;
                     }
 
                 case 3:
                     {
-                        ArticulosMostrados = L_Articulos.Where(p => p.Precio == Convert.ToDouble(Criterio)).ToList();
+                        if(double.TryParse(Criterio, out double Precio))
+                        {
+                            ArticulosMostrados = L_Articulos.Where(p => p.Precio == Precio).ToList();
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para precio debe ser un numero valido", NotificationSeverity.Error);
+                        }
                         break;
                     }
 
                 case 4:
                     {
-                        ArticulosMostrados = L_Articulos.Where(e => e.Existencia == Convert.ToInt32(Criterio)).ToList();
+                        if(int.TryParse(Criterio, out int Existencia))
+                        {
+                            ArticulosMostrados = L_Articulos.Where(e => e.Existencia == Existencia).ToList();
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para existencia debe ser un numero valido", NotificationSeverity.Error);
+                        }
                         break;
                     }
 
                 case 5:
                     {
-                        ArticulosMostrados = L_Articulos.Where(c => c.Categoria != null && c.Categoria.ToLower().Contains(Criterio.ToLower())).ToList();
+                        if(Criterio.All(char.IsDigit))
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para categoria no puede ser un numero", NotificationSeverity.Error);
+                        }
+                        else
+                        {
+                            ArticulosMostrados = L_Articulos.Where(c => c.Categoria != null && c.Categoria.ToLower().Contains(Criterio.ToLower())).ToList();
+                        }
                         break;
                     }
             }
@@ -145,6 +182,10 @@
     private void ActualizarCriterio(ChangeEventArgs e)
     {
         Criterio = e.Value?.ToString();
-        Buscar();
+
+        cancellationTokenSource?.Cancel();
+        cancellationTokenSource = new CancellationTokenSource();
+        var token = cancellationTokenSource.Token;
+        _ = Task.Delay(retrasoDeBusqueda, token).ContinueWith(_ => Buscar(), token);
     }
 }

@@ -68,6 +68,8 @@
     public List<Compras> ComprasMostradas { get; set; } = new List<Compras>();
     public DateTime FechaInicial { get; set; } = DateTime.Now.AddMonths(-1);
     public DateTime FechaFinal { get; set; } = DateTime.Now;
+    private CancellationTokenSource? cancellationTokenSource;
+    private TimeSpan retrasoDeBusqueda = TimeSpan.FromMilliseconds(200);
 
     protected override async Task OnInitializedAsync()
     {
@@ -94,13 +96,27 @@
             {
                 case 1:
                     {
-                        ComprasMostradas = L_Compras.Where(c => c.CompraId == Convert.ToInt32(Criterio)).ToList();
+                        if(int.TryParse(Criterio, out int ID))
+                        {
+                            ComprasMostradas = L_Compras.Where(c => c.CompraId == ID).ToList();
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para la compra debe ser un numero valido", NotificationSeverity.Error);
+                        }
                         break;
                     }
 
                 case 2:
                     {
-                        ComprasMostradas = L_Compras.Where(n => n.Nombre != null && n.Nombre.ToLower().Contains(Criterio.ToLower())).ToList();
+                        if(!int.TryParse(Criterio, out _))
+                        {
+                            ComprasMostradas = L_Compras.Where(n => n.Nombre != null && n.Nombre.ToLower().Contains(Criterio.ToLower())).ToList();   
+                        }
+                        else
+                        {
+                            notify.ShowNotification(titulo: "Error", mensaje: "El criterio de busqueda para nombre no puede ser un numero", NotificationSeverity.Error);
+                        }
                         break;
                     }
             }
@@ -117,6 +133,10 @@
     private void ActualizarCriterio(ChangeEventArgs e)
     {
         Criterio = e.Value?.ToString();
-        Buscar();
+
+        cancellationTokenSource?.Cancel();
+        cancellationTokenSource = new CancellationTokenSource();
+        var token = cancellationTokenSource.Token;
+        _ = Task.Delay(retrasoDeBusqueda, token).ContinueWith(_ => Buscar(), token);
     }
 }
